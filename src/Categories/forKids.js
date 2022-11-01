@@ -1,0 +1,122 @@
+export const everythingForSchool = [
+  { name: "", value: "Stationery" },
+  { name: "", value: "Briefcases, knapsacks, bags" },
+  { name: "", value: "Notebooks, albums, paper" },
+  { name: "", value: "Textbooks" },
+  { name: "", value: "Children's clothing and footwear" },
+  { name: "", value: "Desks and equipment" },
+  { name: "", value: "Other" },
+];
+
+export const childrens = [
+  { name: "Clothing" },
+  { name: "Accessories" },
+  { name: "Other" },
+];
+
+export const toysSwing = [
+  { name: "", value: "Baby toys (up to 3 years old)" },
+  { name: "", value: "Toys for girls " },
+  { name: "", value: "Toys for boys " },
+  { name: "", value: "Active and sports games " },
+  { name: "", value: "Toy furniture" },
+  { name: "", value: "Toy kitchens and utensils " },
+  { name: "", value: "Toys for the crib and stroller" },
+  { name: "", value: "Collective games" },
+  { name: "", value: "Constructors" },
+  { name: "", value: "Dolls" },
+  { name: "", value: "Cars and other vehicles" },
+  { name: "", value: "Models" },
+  { name: "", value: "Musical toys " },
+  { name: "", value: "Soft toys" },
+  { name: "", value: "Board games" },
+  { name: "", value: "Clothes for dolls" },
+  { name: "", value: "Puzzles" },
+  { name: "", value: "Trains and railways" },
+  { name: "", value: "RC toys" },
+  { name: "", value: "Educational toys" },
+  { name: "", value: "Transformers and robots" },
+  { name: "", value: "Electronic toys" },
+  { name: "", value: "Junior Explorer" },
+  { name: "", value: "Everything for water recreation" },
+  { name: "", value: "Boxes and baskets for toys" },
+  { name: "", value: "Miscellaneous" },
+  { name: "", value: "Baby bikes " },
+  { name: "", value: "Bicycles for children " },
+  { name: "", value: "Bicycles for teenagers " },
+  { name: "", value: "Accumulators and Batteries" },
+  { name: "", value: "Rollers, pushers " },
+  { name: "", value: "Swing" },
+  { name: "", value: "Electric swings " },
+  { name: "", value: "Scooters" },
+  { name: "", value: "Sledges, skis " },
+  { name: "", value: "Skateboards" },
+  { name: "", value: "Sports towns " },
+  { name: "", value: "Walkers, jumpers" },
+  { name: "", value: "Electric vehicles, electric motorcycles " },
+  { name: "", value: "Pets" },
+];
+
+export const childrensFurniture = [
+  { name: "", value: "Sofas" },
+  { name: "", value: "Rocking chairs and sun loungers" },
+  { name: "", value: "Cribs" },
+  { name: "", value: "Arenas, swimming pools, arenas" },
+  { name: "", value: "Mattresses" },
+  { name: "", value: "Bedding" },
+  { name: "", value: "Sections" },
+  { name: "", value: "Tables" },
+  { name: "", value: "Changing tables" },
+  { name: "", value: "Chairs and tables for feeding" },
+  { name: "", value: "Fitness equipment and sports sections " },
+  { name: "", value: "Cabinets, bedside tables" },
+  { name: "", value: "Children's room equipment" },
+  { name: "", value: "Desks and equipment " },
+  { name: "", value: "Manufacture of children's furniture" },
+  { name: "", value: "Miscellaneous" },
+];
+
+export const carSeatsCarriers = [
+  { name: "", value: "Car seats " },
+  { name: "", value: "Kangaroo bags " },
+  { name: "", value: "Carrying bags " },
+  { name: "", value: "Slings" },
+  { name: "", value: "Other" },
+];
+
+export const accessoriesAndNutrition = [
+  { name: "", value: "Feeding accessories" },
+  { name: "", value: "Scales, thermometers" },
+  { name: "", value: "Children's cosmetics" },
+  { name: "", value: "Baby food" },
+  { name: "", value: "Bottle containers, thermal bags" },
+  { name: "", value: "Breast pumps " },
+  { name: "", value: "Heaters and sterilizers" },
+  { name: "", value: "Baby monitors, video baby monitors" },
+  { name: "", value: "Changing tables" },
+  { name: "", value: "Chairs and tables for feeding" },
+  { name: "", value: "Children's tableware" },
+  { name: "", value: "Baths, coasters " },
+  { name: "", value: "Bags, backpacks " },
+  { name: "", value: "Hygiene items " },
+  { name: "", value: "Accessories" },
+  { name: "", value: "Miscellaneous" },
+  { name: "", value: "Medical services" },
+];
+
+export const circlesKindergardensSection = [
+  { name: "", value: "Playgrounds" },
+  { name: "", value: "Seasonal camps " },
+  { name: "", value: "Sports sections " },
+  { name: "", value: "Thematic mugs " },
+  { name: "", value: "Educators, nannies, tutors " },
+  { name: "", value: "Kindergartens" },
+  { name: "", value: "Miscellaneous" },
+  { name: "", value: "Children's medicine " },
+];
+
+export const other = [
+  { name: "", value: "Strollers" },
+  { name: "", value: "Children's activities" },
+  { name: "", value: "Miscellaneous" },
+];

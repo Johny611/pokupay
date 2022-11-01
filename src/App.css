@@ -1,0 +1,149 @@
+.auth_or p::before {
+  display: inline-block;
+  content: "";
+  border-top: 0.1rem solid white;
+  width: 35%;
+  margin: 0 0.5rem;
+  transform: translateY(-0.3rem);
+}
+
+.auth_or p::after {
+  display: inline-block;
+  content: "";
+  border-top: 0.1rem solid white;
+  width: 35%;
+  margin: 0 0.5rem;
+  transform: translateY(-0.3rem);
+}
+
+.pb-none {
+  padding-bottom: 0;
+}
+
+.google_sign {
+  color: rgb(255, 255, 255);
+  padding: 5px 0;
+  width: 240px;
+  border: none;
+  text-align: center;
+  box-shadow: rgb(0 0 0 / 25%) 0px 2px 4px 0px;
+  font-size: 16px;
+  line-height: 48px;
+  display: block;
+  border-radius: 1px;
+  transition: background-color 0.218s ease 0s, border-color 0.218s ease 0s,
+    box-shadow 0.218s ease 0s;
+  font-family: Roboto, arial, sans-serif;
+  cursor: pointer;
+  user-select: none;
+}
+
+.google_pic {
+  width: 48px;
+  height: 48px;
+  text-align: center;
+  display: block;
+  margin-top: 1px;
+  margin-left: 10px;
+  float: left;
+  border-radius: 1px;
+  white-space: nowrap;
+}
+
+.premium_ads {
+  display: grid;
+  justify-items: center;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 10px;
+}
+
+.column_card_img {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  margin: 0 auto;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.profile_ads_body_grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+}
+
+.profile_ads_body_row {
+  width: 95%;
+}
+
+select option {
+  background: transparent;
+  color: #454f6b !important;
+}
+
+.search_default {
+  background-image: url(./assets/icons/location-black.png);
+}
+
+@media only screen and (max-width: 1024px) {
+  .premium_ads {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .premium_ads {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .premium_ads {
+    grid-template-columns: 1fr 1fr;
+  }
+  .profile_ads_body_grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  .profile_ads_body_grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+
+
+
+
+.selectdiv {
+  position: relative;
+}
+
+.selectdiv:after {
+    position: absolute;
+    pointer-events: none;
+    content: '▼';
+    color: gray;
+    right: 11px;
+    top: 40%;
+    height: 34px;
+    padding: 6px 0px 0px 8px;
+    border-left: 1px solid gray;
+}
+
+/* IE11 hide native button (thanks Matt!) */
+select::-ms-expand {
+display: none;
+}
+
+.selectdiv select {
+  -webkit-appearance: none;
+  -moz-appearance: none; 
+  appearance: none;
+
+}
