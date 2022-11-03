@@ -44,7 +44,7 @@ function CategoryItem(props) {
                 className="py-2 font-semibold transition-all hover:bg-white hover:w-full hover:text-black hover:px-3 hover:rounded-xl"
               >
                 {" "}
-                <Link to={`/category/${item.path}`}>{item.rus}</Link>
+                <Link to={`/${props.category}/${item.path}`}>{item.rus}</Link>
               </li>
             ))}
           </ul>

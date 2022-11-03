@@ -144,7 +144,7 @@ function App() {
         <Route path="/profile/top-up-balance" element={<Balance />} />
         <Route path="/profile/packages" element={<Packages />} />
         <Route path="/publish" element={<Publish />} />
-        <Route path="/category/:categoryType" element={<Category />} />
+        <Route path="/:category/:categoryType" element={<Category />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />

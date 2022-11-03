@@ -7,7 +7,7 @@ import {
   doc,
   getDoc,
   collection,
-  CollectionReference,
+  serverTimestamp,
 } from "firebase/firestore";
 import { IoChevronDownSharp, IoCaretForward } from "react-icons/io5";
 import { categories } from "../components/Categories/CategoryList";
@@ -184,7 +184,7 @@ const Publish = () => {
       `ads/${publishData.category}/${publishData.subCategory}`
     );
 
-    await addDoc(colRef, publishData)
+    await addDoc(colRef, { ...publishData, createdAt: serverTimestamp() })
       .then((res) => {
         console.log(res);
         console.log("document uploaded");

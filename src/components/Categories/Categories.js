@@ -9,6 +9,7 @@ function Categories() {
         {categories.map((item) => (
           <CategoryItem
             key={item.id}
+            category={item.name}
             name={item.rus}
             icon={item.pic}
             activeIcon={item.activePic}
