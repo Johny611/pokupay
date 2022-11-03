@@ -8,13 +8,12 @@ import {
   getDocs,
   Timestamp,
 } from "firebase/firestore";
+import timestampToDate from "timestamp-to-date";
 import ColumnCard from "../components/Card/ColumnCard";
 
 const Category = () => {
   const [data, setData] = useState([]);
   let params = useParams();
-
-  Timestamp.toString();
 
   useEffect(() => {
     const categoryData = async () => {
@@ -38,46 +37,24 @@ const Category = () => {
     categoryData();
   }, []);
 
-  const convertTimestamp = (timestamp) => {
-    let date = timestamp.toDate();
-    let mm = date.getMonth();
-    let dd = date.getDate();
-    let yyyy = date.getFullYear();
-
-    date = mm + "/" + dd + "/" + yyyy;
-    return date;
-  };
-
   console.table(data);
   return (
     <div className="">
       <div className="filters"></div>
       <div className="premium_ads  my-5">
-        {data.map((ad) => {
-          function convertDate(time) {
-            //time should be server timestamp seconds only
-            let dateInMillis = time * 1000;
-            let date = new Date(dateInMillis);
-            let myDate = date.toLocaleDateString();
-            let myTime = date.toLocaleTimeString();
-            myDate = myDate.replaceAll("/", "-");
-            return myDate + " " + myTime;
-          }
-          let date = convertDate(ad.createdAt);
-          return (
-            <ColumnCard
-              key={ad.docID}
-              //  img={}
-              title={ad.title}
-              address={ad.location}
-              // date={new Date(ad.createdAt?.seconds * 1000).toJSON()}
-              date={date}
-              price={ad.priceFrom}
-              currency={ad.currency}
-              //  categoryPic={}
-            />
-          );
-        })}
+        {data.map((ad) => (
+          <ColumnCard
+            key={ad.docID}
+            //  img={}
+            title={ad.title}
+            address={ad.location}
+            date={new Date(ad.createdAt?.seconds * 1000).toJSON()}
+            // date={timestampToDate(ad.createdAt?.seconds, "yyyy-MM-dd HH:mm")}
+            price={ad.priceFrom}
+            currency={ad.currency}
+            //  categoryPic={}
+          />
+        ))}
       </div>
     </div>
   );
