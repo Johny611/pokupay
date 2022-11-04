@@ -24,6 +24,7 @@ import { registerUser } from "./app/functions";
 import { doc, getDoc } from "firebase/firestore";
 import { signOut } from "firebase/auth";
 import { ref, deleteObject } from "firebase/storage";
+import Product from "./pages/Product";
 
 function getWindowSize() {
   const { innerWidth, innerHeight } = window;
@@ -145,6 +146,10 @@ function App() {
         <Route path="/profile/packages" element={<Packages />} />
         <Route path="/publish" element={<Publish />} />
         <Route path="/:category/:categoryType" element={<Category />} />
+        <Route
+          path="/product/:category/:categoryType/:productID"
+          element={<Product />}
+        />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />

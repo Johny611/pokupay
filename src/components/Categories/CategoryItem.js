@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function CategoryItem(props) {
   const [activeCategory, setActiveCategory] = useState(false);
-  let params = useParams();
   let menuRef = useRef();
 
   useEffect(() => {

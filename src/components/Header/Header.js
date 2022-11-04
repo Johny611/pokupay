@@ -92,17 +92,20 @@ function Header() {
         <img src={logo} alt="" />
       </Link>
       <div className="header_links">
-        <div className="languages mr-3">Рус</div>
+        <div className="languages mr-3">
+          <p></p>
+          Рус
+        </div>
 
         {windowSize.innerWidth > 768 ? (
           <div className="header_links_wrapper">
             <Link to="/chat" className="header_link">
               <img src={messageOutlined} alt="" />
-              <p>Сообщения</p>
+              {/* <p>Сообщения</p> */}
             </Link>
             <Link to="/favourite" className="header_link">
               <img src={likeOutlined} alt="" />
-              <p>Избранные</p>
+              {/* <p>Избранные</p> */}
             </Link>
             <div className="profile_menu relative">
               <Link to="/profile" className="header_link relative">

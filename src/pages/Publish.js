@@ -142,6 +142,7 @@ const mobileOperation = [
 const Publish = () => {
   const dispatch = useDispatch();
   const publishData = useSelector((state) => state.publishData.data);
+  const images = useSelector((state) => state.images.data);
 
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [isSubCategoryOpen, setIsSubCategoryOpen] = useState(false);
@@ -184,7 +185,11 @@ const Publish = () => {
       `ads/${publishData.category}/${publishData.subCategory}`
     );
 
-    await addDoc(colRef, { ...publishData, createdAt: serverTimestamp() })
+    await addDoc(colRef, {
+      ...publishData,
+      createdAt: serverTimestamp(),
+      photos: [...images],
+    })
       .then((res) => {
         console.log(res);
         console.log("document uploaded");

@@ -57,12 +57,7 @@
   gap: 10px;
 }
 
-.column_card_img {
-  max-width: 100%;
-  height: auto;
-  object-fit: contain;
-  margin: 0 auto;
-}
+
 
 input[type="file"] {
   display: none;
