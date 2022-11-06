@@ -1,44 +1,54 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { db } from "../firebase";
-import {
-  collection,
-  query,
-  where,
-  getDocs,
-  Timestamp,
-} from "firebase/firestore";
+import React from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import timestampToDate from "timestamp-to-date";
 import ColumnCard from "../components/Card/ColumnCard";
 import Vacancies from "../components/Filters/Vacancies";
 
+import work from "../assets/work.png";
+import transport from "../assets/transport.png";
+import realEstate from "../assets/estate.png";
+import electronics from "../assets/electrical-devices.png";
+import dressesShoes from "../assets/dresses.png";
+import building from "../assets/building.png";
+import home from "../assets/home.png";
+import gifts from "../assets/gifts.png";
+import forChildren from "../assets/children.png";
+import animals from "../assets/animals.png";
+import agriculture from "../assets/agriculture.png";
+import leisureHobbies from "../assets/holiday.png";
+import services from "../assets/services.png";
+import providers from "../assets/provider.png";
+import CategoryListLoad from "../hooks/CategoryListLoad";
+import handleFavourite from "../hooks/handleFavourite";
+
+const icons = [
+  { work },
+  { transport },
+  { realEstate },
+  { electronics },
+  { dressesShoes },
+  { building },
+  { home },
+  { gifts },
+  { forChildren },
+  { animals },
+  { agriculture },
+  { leisureHobbies },
+  { services },
+  { providers },
+];
+
 const Category = () => {
-  const [data, setData] = useState([]);
+  const navigate = useNavigate();
   let params = useParams();
-
-  useEffect(() => {
-    const categoryData = async () => {
-      const q = query(
-        collection(db, "ads", params.category, params.categoryType),
-        where("subCategory", "==", params.categoryType)
-      );
-
-      const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        setData((prev) => [
-          ...prev,
-          {
-            docID: doc.id,
-            ...doc.data(),
-          },
-        ]);
-      });
-    };
-    categoryData();
-  }, []);
+  const [data, deleteFavourite] = CategoryListLoad();
+  const [addFavourite, removeFavourite] = handleFavourite(
+    deleteFavourite,
+    navigate
+  );
 
   console.table(data);
+
   return (
     <div className="flex-1 xs:w-[95%] w-[80%] max-w-[1024px]">
       <div className="filters">
@@ -60,7 +70,10 @@ const Category = () => {
             )}
             price={`от${ad.fromPrice} до${ad.priceTo}` || ad.price}
             currency={ad.currency}
-            //  categoryPic={}
+            // pic={}
+            favourite={ad.favourite}
+            addFavourite={addFavourite}
+            removeFavourite={removeFavourite}
           />
         ))}
       </div>

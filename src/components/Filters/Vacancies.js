@@ -1,7 +1,7 @@
 import React from "react";
 
 const Vacancies = () => {
-  return <div>vacancies</div>;
+  return <div>vacancies filters</div>;
 };
 
 export default Vacancies;

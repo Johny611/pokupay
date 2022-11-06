@@ -177,7 +177,7 @@ const Profile = () => {
 
   useEffect(() => {
     const userDoc = async () => {
-      const docs = await getDoc(doc(db, "users", auth.currentUser.uid));
+      const docs = await getDoc(doc(db, "users", auth.currentUser?.uid));
       setUserDoc(docs.data());
     };
 

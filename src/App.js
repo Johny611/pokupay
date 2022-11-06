@@ -56,14 +56,14 @@ function App() {
         });
       }
 
-      signOut(auth)
-        .then(() => {
-          sessionStorage.clear();
-          dispatch(logout());
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      // signOut(auth)
+      //   .then(() => {
+      //     sessionStorage.clear();
+      //     dispatch(logout());
+      //   })
+      //   .catch((error) => {
+      //     console.log(error);
+      //   });
       return (event.returnValue = "Are you sure you want to exit?");
     };
 
@@ -111,6 +111,7 @@ function App() {
             phoneNumber: userAuth.phoneNumber,
             balanceID: userAuth.providerData[0].uid,
             photoURL: userAuth.photoURL,
+            favourites: [],
             uid: userAuth.uid,
             balance: 0,
             rating: 0,
