@@ -20,6 +20,7 @@ import services from "../assets/services.png";
 import providers from "../assets/provider.png";
 import CategoryListLoad from "../hooks/CategoryListLoad";
 import handleFavourite from "../hooks/handleFavourite";
+import useScroll from "../hooks/useScroll";
 
 const icons = [
   { work },
@@ -46,7 +47,9 @@ const Category = () => {
     deleteFavourite,
     navigate
   );
+  const [offset] = useScroll();
 
+  console.log(offset);
   console.table(data);
 
   return (
