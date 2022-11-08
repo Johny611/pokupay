@@ -3,6 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import timestampToDate from "timestamp-to-date";
 import ColumnCard from "../components/Card/ColumnCard";
 import Vacancies from "../components/Filters/Vacancies";
+import CircularProgress from "@mui/material/CircularProgress";
+import Stack from "@mui/material/Stack";
 
 import work from "../assets/work.png";
 import transport from "../assets/transport.png";
@@ -42,15 +44,16 @@ const icons = [
 const Category = () => {
   const navigate = useNavigate();
   let params = useParams();
-  const [data, deleteFavourite] = CategoryListLoad();
+  const [offset] = useScroll();
+  const [data, deleteFavourite, loading] = CategoryListLoad();
   const [addFavourite, removeFavourite] = handleFavourite(
     deleteFavourite,
     navigate
   );
-  const [offset] = useScroll();
 
   console.log(offset);
   console.table(data);
+  console.log(loading);
 
   return (
     <div className="flex-1 xs:w-[95%] w-[80%] max-w-[1024px]">
@@ -58,27 +61,33 @@ const Category = () => {
         {params.categoryType === "vacancies" && <Vacancies />}
       </div>
       <div className="premium_ads my-5">
-        {data.map((ad) => (
-          <ColumnCard
-            key={ad.docID}
-            category={ad.category}
-            subCategory={ad.subCategory}
-            productID={ad.docID}
-            img={ad.photos[0]?.url || require("../assets/placeholder.png")}
-            title={ad.title}
-            address={ad.location}
-            date={timestampToDate(
-              ad.createdAt?.seconds * 1000,
-              "yyyy-MM-dd HH:mm"
-            )}
-            price={`от${ad.fromPrice} до${ad.priceTo}` || ad.price}
-            currency={ad.currency}
-            // pic={}
-            favourite={ad.favourite}
-            addFavourite={addFavourite}
-            removeFavourite={removeFavourite}
-          />
-        ))}
+        {data.map((ad) => {
+          return loading === true ? (
+            <Stack sx={{ color: "orange.500" }} spacing={2} direction="row">
+              <CircularProgress color="inherit" />
+            </Stack>
+          ) : (
+            <ColumnCard
+              key={ad.docID}
+              category={ad.category}
+              subCategory={ad.subCategory}
+              productID={ad.docID}
+              img={ad.photos[0]?.url || require("../assets/placeholder.png")}
+              title={ad.title}
+              address={ad.location}
+              date={timestampToDate(
+                ad.createdAt?.seconds * 1000,
+                "yyyy-MM-dd HH:mm"
+              )}
+              price={`от${ad.fromPrice} до${ad.priceTo}` || ad.price}
+              currency={ad.currency}
+              // pic={}
+              favourite={ad.favourite}
+              addFavourite={addFavourite}
+              removeFavourite={removeFavourite}
+            />
+          );
+        })}
       </div>
     </div>
   );

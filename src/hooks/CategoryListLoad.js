@@ -9,17 +9,37 @@ import {
 } from "firebase/firestore";
 import { db, auth } from "../firebase";
 
-const CategoryListLoad = (removeID) => {
+const CategoryListLoad = (queryList) => {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
   let params = useParams();
 
   useEffect(() => {
     const categoryData = async () => {
+      if (queryList) {
+        const initialQueryList = [
+          {
+            property: "",
+            operator: "",
+            value: "",
+          },
+        ];
+
+        const queryConditions = queryList.map((condition) => {
+          where(condition.property, condition.operator, condition.value);
+        });
+
+        const queryToPerform = query(
+          collection(db, "ads", params.category, params.categoryType),
+          ...queryConditions
+        );
+      }
+
       const q = query(
         collection(db, "ads", params.category, params.categoryType),
         where("subCategory", "==", params.categoryType)
       );
-
+      setLoading(true);
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
         setData((prev) => [
@@ -30,6 +50,7 @@ const CategoryListLoad = (removeID) => {
           },
         ]);
       });
+      setLoading(false);
 
       const token = sessionStorage.getItem("Auth token");
       const docRef = collection(
@@ -72,7 +93,7 @@ const CategoryListLoad = (removeID) => {
     );
   };
 
-  return [data, deleteFavourite];
+  return [data, deleteFavourite, loading];
 };
 
 export default CategoryListLoad;
