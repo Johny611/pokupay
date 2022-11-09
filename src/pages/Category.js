@@ -5,6 +5,10 @@ import ColumnCard from "../components/Card/ColumnCard";
 import Vacancies from "../components/Filters/Vacancies";
 import CircularProgress from "@mui/material/CircularProgress";
 import Stack from "@mui/material/Stack";
+import CategoryListLoad from "../hooks/useCategoryListLoad";
+import useHandleFavourite from "../hooks/useHandleFavourite";
+import useScroll from "../hooks/useScroll";
+import { useSelector, useDispatch } from "react-redux";
 
 import work from "../assets/work.png";
 import transport from "../assets/transport.png";
@@ -20,9 +24,6 @@ import agriculture from "../assets/agriculture.png";
 import leisureHobbies from "../assets/holiday.png";
 import services from "../assets/services.png";
 import providers from "../assets/provider.png";
-import CategoryListLoad from "../hooks/CategoryListLoad";
-import handleFavourite from "../hooks/handleFavourite";
-import useScroll from "../hooks/useScroll";
 
 const icons = [
   { work },
@@ -42,16 +43,19 @@ const icons = [
 ];
 
 const Category = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const data = useSelector((state) => state.categoryData.data);
   let params = useParams();
-  const [offset] = useScroll();
-  const [data, deleteFavourite, loading] = CategoryListLoad();
-  const [addFavourite, removeFavourite] = handleFavourite(
+  const [offSet] = useScroll();
+  const [deleteFavourite, loading] = CategoryListLoad();
+  const [addFavourite, removeFavourite] = useHandleFavourite(
     deleteFavourite,
     navigate
   );
 
-  console.log(offset);
+  console.log(data);
+  console.log(offSet);
   console.table(data);
   console.log(loading);
 
@@ -62,11 +66,7 @@ const Category = () => {
       </div>
       <div className="premium_ads my-5">
         {data.map((ad) => {
-          return loading === true ? (
-            <Stack sx={{ color: "orange.500" }} spacing={2} direction="row">
-              <CircularProgress color="inherit" />
-            </Stack>
-          ) : (
+          return (
             <ColumnCard
               key={ad.docID}
               category={ad.category}
@@ -89,6 +89,19 @@ const Category = () => {
           );
         })}
       </div>
+      {loading && (
+        <Stack
+          sx={{
+            color: "orange.500",
+            margin: "2rem",
+            display: "flex",
+            justifyContent: "center",
+          }}
+          spacing={2}
+          direction="row">
+          <CircularProgress color="inherit" />
+        </Stack>
+      )}
     </div>
   );
 };

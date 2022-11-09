@@ -18,7 +18,7 @@ const Card = ({
   removeFavourite,
 }) => {
   return (
-    <div className="transition-all hover:scale-[102%] xs:bg-[#474f6b] flex flex-col rounded-md overflow-hidden bg-white p-2 w-full">
+    <div className="transition-all hover:scale-[102%] hover:border hover:border-[#febe3261] xs:bg-[#474f6b] flex flex-col rounded-md overflow-hidden bg-white p-2 w-full">
       <Link
         to={`/product/${category}/${subCategory}/${productID}`}
         className="w-full">

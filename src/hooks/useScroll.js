@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 const useScroll = () => {
-  const [offset, setOffset] = useState(0);
+  const [offSet, setOffset] = useState(0);
 
   useEffect(() => {
     const handleScroll = (e) => {
@@ -9,15 +9,15 @@ const useScroll = () => {
       const currentHeight =
         e.target.documentElement.scrollTop + window.innerHeight;
       if (currentHeight + 1 >= scrollHeight) {
-        setOffset(offset + 5);
+        setOffset(offSet + 10);
       }
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [offset]);
+  }, [offSet]);
 
-  return [offset];
+  return [offSet];
 };
 
 export default useScroll;

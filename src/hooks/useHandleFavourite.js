@@ -1,7 +1,7 @@
 import { setDoc, deleteDoc, doc } from "firebase/firestore";
 import { db, auth } from "../firebase";
 
-const handleFavourite = (deleteFavourite, navigate) => {
+const useHandleFavourite = (deleteFavourite, navigate) => {
   const addFavourite = async (category, subCategory, productID) => {
     const token = sessionStorage.getItem("Auth token");
     if (!token) navigate("/auth");
@@ -37,4 +37,4 @@ const handleFavourite = (deleteFavourite, navigate) => {
   return [addFavourite, removeFavourite];
 };
 
-export default handleFavourite;
+export default useHandleFavourite;
