@@ -3,6 +3,66 @@ import { Input, Checkbox } from "@material-tailwind/react";
 import { useDispatch, useSelector } from "react-redux";
 import { setPublish } from "../../../features/publishSlice";
 
+const bodyType = [
+  { name: "", rus: "Кабриолет", eng: "", uzb: "" },
+  { name: "", rus: "Пикап", eng: "", uzb: "" },
+  { name: "", rus: "Купе", eng: "", uzb: "" },
+  { name: "", rus: "Универсал", eng: "", uzb: "" },
+  { name: "", rus: "Хэтчбек", eng: "", uzb: "" },
+  { name: "", rus: "Минивэн", eng: "", uzb: "" },
+  { name: "", rus: "Внедорожник", eng: "", uzb: "" },
+  { name: "", rus: "Седан", eng: "", uzb: "" },
+  { name: "", rus: "Другой", eng: "", uzb: "" },
+];
+
+const transmission = [
+  { name: "", rus: "Механическая", eng: "", uzb: "" },
+  { name: "", rus: "Автоматическая", eng: "", uzb: "" },
+  { name: "", rus: "Другая", eng: "", uzb: "" },
+];
+
+const color = [
+  { name: "", rus: "Белый", eng: "", uzb: "" },
+  { name: "", rus: "Черный", eng: "", uzb: "" },
+  { name: "", rus: "Синий", eng: "", uzb: "" },
+  { name: "", rus: "Серый", eng: "", uzb: "" },
+  { name: "", rus: "Серебристый", eng: "", uzb: "" },
+  { name: "", rus: "Красный", eng: "", uzb: "" },
+  { name: "", rus: "Зеленый", eng: "", uzb: "" },
+  { name: "", rus: "Апельсин", eng: "", uzb: "" },
+  { name: "", rus: "Асфальт", eng: "", uzb: "" },
+  { name: "", rus: "Бежевый", eng: "", uzb: "" },
+  { name: "", rus: "Бирюзовый", eng: "", uzb: "" },
+  { name: "", rus: "Бронзовый", eng: "", uzb: "" },
+  { name: "", rus: "Вишнёвый", eng: "", uzb: "" },
+  { name: "", rus: "Голубой", eng: "", uzb: "" },
+  { name: "", rus: "Желтый", eng: "", uzb: "" },
+  { name: "", rus: "Золотой", eng: "", uzb: "" },
+  { name: "", rus: "Коричневый", eng: "", uzb: "" },
+  { name: "", rus: "Магнолии", eng: "", uzb: "" },
+  { name: "", rus: "Матовый", eng: "", uzb: "" },
+  { name: "", rus: "Оливковый", eng: "", uzb: "" },
+  { name: "", rus: "Розовый", eng: "", uzb: "" },
+  { name: "", rus: "Сафари", eng: "", uzb: "" },
+  { name: "", rus: "Фиолетовый", eng: "", uzb: "" },
+  { name: "", rus: "Хамелеон", eng: "", uzb: "" },
+];
+
+const fuelType = [
+  { name: "", rus: "Бензин", eng: "", uzb: "" },
+  { name: "", rus: "Дизель", eng: "", uzb: "" },
+  { name: "", rus: "Другой", eng: "", uzb: "" },
+];
+
+const condition = [
+  { name: "", rus: "Отличное", eng: "", uzb: "" },
+  { name: "", rus: "Хорошее", eng: "", uzb: "" },
+  { name: "", rus: "Среднее", eng: "", uzb: "" },
+  { name: "", rus: "Требует ремонта", eng: "", uzb: "" },
+];
+
+const owners = [{ name: "" }];
+
 const Cars = () => {
   const dispatch = useDispatch();
   const publishData = useSelector((state) => state.publishData.data);
@@ -26,10 +86,9 @@ const Cars = () => {
               name="model"
               id="model"
               value={publishData.model}
-              onChange={(e) =>
-                dispatch(setPublish({ [e.target.name]: e.target.value }))
-              }>
+              onChange={addPublishData}>
               <option value=""></option>
+              {}
               <option value="fullTime">Полная занятость</option>
               <option value="partTime">Частичная занятость</option>
               <option value="project">Проектная / временная работа</option>
@@ -46,14 +105,17 @@ const Cars = () => {
               name="bodyType"
               id="bodyType"
               value={publishData.bodyType}
-              onChange={(e) =>
-                dispatch(setPublish({ [e.target.name]: e.target.value }))
-              }>
+              onChange={addPublishData}>
               <option value=""></option>
-              <option value="fullDay">Полный день</option>
-              <option value="shiftWork">Сменный график</option>
-              <option value="flexibleSchedule">Гибкий график</option>
-              <option value="shiftMethod">Вахтовый метод</option>
+              <option value="cabriolet">Кабриолет</option>
+              <option value="pickup">Пикап</option>
+              <option value="coupe">Купе</option>
+              <option value="universal">Универсал</option>
+              <option value="hatchback">Хэтчбек</option>
+              <option value="minivan">Минивэн</option>
+              <option value="suv">Внедорожник</option>
+              <option value="sedan">Седан</option>
+              <option value="other">Другой</option>
             </select>
           </div>
           <div className="selectdiv flex flex-col">
@@ -65,14 +127,11 @@ const Cars = () => {
               name="transmission"
               id="transmission"
               value={publishData.transmission}
-              onChange={(e) =>
-                dispatch(setPublish({ [e.target.name]: e.target.value }))
-              }>
+              onChange={addPublishData}>
               <option value=""></option>
-              <option value="noExperience">Без опыта</option>
-              <option value="1-3">От 1 года до 3 лет</option>
-              <option value="3-6">От 3 до 6 лет</option>
-              <option value="above-6">Более 6 лет</option>
+              <option value="mechanical">Механическая</option>
+              <option value="automatic">Автоматическая</option>
+              <option value="other">Другая</option>
             </select>
           </div>
           <div className="selectdiv flex flex-col">
@@ -84,14 +143,31 @@ const Cars = () => {
               name="color"
               id="color"
               value={publishData.color}
-              onChange={(e) =>
-                dispatch(setPublish({ [e.target.name]: e.target.value }))
-              }>
+              onChange={addPublishData}>
               <option value=""></option>
-              <option value="high">Высшее</option>
-              <option value="incompleteHigh">Незаконченное высшее</option>
-              <option value="secondary">Среднее</option>
-              <option value="specializedSecondary">Среднее специальное</option>
+              <option value="white">Белый</option>
+              <option value="black">Черный</option>
+              <option value="blue">Синий</option>
+              <option value="gray">Серый</option>
+              <option value="silver">Серебристый</option>
+              <option value="red">Красный</option>
+              <option value="green">Зеленый</option>
+              <option value="apelsin">Апельсин</option>
+              <option value="asphalt">Асфальт</option>
+              <option value="beige">Бежевый</option>
+              <option value="turquoise">Бирюзовый</option>
+              <option value="bronze">Бронзовый</option>
+              <option value="cherry">Вишнёвый</option>
+              <option value="yellow">Желтый</option>
+              <option value="gold">Золотой</option>
+              <option value="brown">Коричневый</option>
+              <option value="magnolias">Магнолии</option>
+              <option value="matte">Матовый</option>
+              <option value="olive">Оливковый</option>
+              <option value="pink">Розовый</option>
+              <option value="safari">Сафари</option>
+              <option value="violet">Фиолетовый</option>
+              <option value="chameleon">Хамелеон</option>
             </select>
           </div>
           <div className="selectdiv flex flex-col">
@@ -103,14 +179,11 @@ const Cars = () => {
               name="fuelType"
               id="fuelType"
               value={publishData.fuelType}
-              onChange={(e) =>
-                dispatch(setPublish({ [e.target.name]: e.target.value }))
-              }>
+              onChange={addPublishData}>
               <option value=""></option>
-              <option value="high">Высшее</option>
-              <option value="incompleteHigh">Незаконченное высшее</option>
-              <option value="secondary">Среднее</option>
-              <option value="specializedSecondary">Среднее специальное</option>
+              <option value="petrol">Бензин</option>
+              <option value="diesel">Дизель</option>
+              <option value="other">Другой</option>
             </select>
           </div>
           <div className="selectdiv flex flex-col">
@@ -122,14 +195,12 @@ const Cars = () => {
               name="condition"
               id="condition"
               value={publishData.condition}
-              onChange={(e) =>
-                dispatch(setPublish({ [e.target.name]: e.target.value }))
-              }>
+              onChange={addPublishData}>
               <option value=""></option>
-              <option value="high">Высшее</option>
-              <option value="incompleteHigh">Незаконченное высшее</option>
-              <option value="secondary">Среднее</option>
-              <option value="specializedSecondary">Среднее специальное</option>
+              <option value="">Отличное</option>
+              <option value="">Хорошее</option>
+              <option value="">Среднее</option>
+              <option value="">Требует ремонта</option>
             </select>
           </div>
           <div className="selectdiv flex flex-col">
@@ -141,14 +212,12 @@ const Cars = () => {
               name="owners"
               id="owners"
               value={publishData.owners}
-              onChange={(e) =>
-                dispatch(setPublish({ [e.target.name]: e.target.value }))
-              }>
+              onChange={addPublishData}>
               <option value=""></option>
-              <option value="high">Высшее</option>
-              <option value="incompleteHigh">Незаконченное высшее</option>
-              <option value="secondary">Среднее</option>
-              <option value="specializedSecondary">Среднее специальное</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4+">4+</option>
             </select>
           </div>
         </div>
