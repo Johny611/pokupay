@@ -25,13 +25,44 @@ const Bus = () => {
               name="brand"
               id="brand"
               value={publishData.brand}
-              onChange={addPublishData}>
+              onChange={addPublishData}
+            >
               <option value=""></option>
-              <option value="fullTime">Полная занятость</option>
-              <option value="partTime">Частичная занятость</option>
-              <option value="project">Проектная / временная работа</option>
-              <option value="internship">Стажировка</option>
-              <option value="volunteering">Волонтерство</option>
+              <option value="Bova">Bova</option>
+              <option value="Daewoo">Daewoo</option>
+              <option value="Ford">Ford</option>
+              <option value="Golden Dragon">Golden Dragon</option>
+              <option value="Higer">Higer</option>
+              <option value="Hyundai">Hyundai</option>
+              <option value="Ikarus">Ikarus</option>
+              <option value="IVECO">IVECO</option>
+              <option value="Kia">Kia</option>
+              <option value="King Long">King Long</option>
+              <option value="MAN">MAN</option>
+              <option value="Mercedes-Benz">Mercedes-Benz</option>
+              <option value="Neoplan">Neoplan</option>
+              <option value="Nissan">Nissan</option>
+              <option value="Scania">Scania</option>
+              <option value="Setra">Setra</option>
+              <option value="Shen Long">Shen Long</option>
+              <option value="SsangYong">SsangYong</option>
+              <option value="TAM">TAM</option>
+              <option value="Volvo">Volvo</option>
+              <option value="Yutong">Yutong</option>
+              <option value="Богдан">Богдан</option>
+              <option value="Волжанин">Волжанин</option>
+              <option value="ГАЗ">ГАЗ</option>
+              <option value="ЗИЛ">ЗИЛ</option>
+              <option value="КАвЗ">КАвЗ</option>
+              <option value="КамАЗ">КамАЗ</option>
+              <option value="ЛАЗ">ЛАЗ</option>
+              <option value="ЛиАЗ">ЛиАЗ</option>
+              <option value="МАЗ">МАЗ</option>
+              <option value="МАРЗ">МАРЗ</option>
+              <option value="НефАЗ">НефАЗ</option>
+              <option value="ПАЗ">ПАЗ</option>
+              <option value="РАФ">РАФ</option>
+              <option value="other">Другая марка</option>
             </select>
           </div>
         </div>

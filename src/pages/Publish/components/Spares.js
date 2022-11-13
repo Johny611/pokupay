@@ -29,7 +29,8 @@ const Spares = () => {
                 publishData.spareFor === "auto"
                   ? "bg-[#febe32]"
                   : "bg-[#f2f2f3]"
-              }`}>
+              }`}
+            >
               Авто
             </button>
             <button
@@ -39,7 +40,8 @@ const Spares = () => {
                 publishData.spareFor === "moto"
                   ? "bg-[#febe32]"
                   : "bg-[#f2f2f3]"
-              }`}>
+              }`}
+            >
               Мото
             </button>
           </div>
@@ -55,7 +57,8 @@ const Spares = () => {
               name="autoSpareType"
               id="autoSpareType"
               value={publishData.autoSpareType}
-              onChange={addPublishData}>
+              onChange={addPublishData}
+            >
               <option value=""></option>
               <option value="autoSpares">Автозапчасти</option>
               <option value="accessoriesForAuto">Аксессуары для авто</option>
@@ -79,7 +82,8 @@ const Spares = () => {
                 name="spareType"
                 id="spareType"
                 value={publishData.spareType}
-                onChange={addPublishData}>
+                onChange={addPublishData}
+              >
                 <option value=""></option>
                 <option value="autolight">Автосвет</option>
                 <option value="batteries">Аккумуляторы</option>
@@ -116,7 +120,8 @@ const Spares = () => {
                 name="autoAudioType"
                 id="autoAudioType"
                 value={publishData.autoAudioType}
-                onChange={addPublishData}>
+                onChange={addPublishData}
+              >
                 <option value=""></option>
                 <option value="autolight">Магнитолы</option>
                 <option value="batteries">Колонки и сабвуферы</option>
@@ -137,7 +142,8 @@ const Spares = () => {
                 name="autoAudioType"
                 id="autoAudioType"
                 value={publishData.autoAudioType}
-                onChange={addPublishData}>
+                onChange={addPublishData}
+              >
                 <option value=""></option>
                 <option value="other">Другая марка</option>
                 <option value="AD Audio">AD Audio</option>
@@ -289,7 +295,8 @@ const Spares = () => {
                 name="autoGPSNavigatorBrand"
                 id="autoGPSNavigatorBrand"
                 value={publishData.autoGPSNavigatorBrand}
-                onChange={addPublishData}>
+                onChange={addPublishData}
+              >
                 <option value=""></option>
                 <option value="Asus">Asus</option>
                 <option value="Altina">Altina</option>
@@ -351,7 +358,8 @@ const Spares = () => {
                 name="transportForSpareBrand"
                 id="transportForSpareBrand"
                 value={publishData.transportForSpareBrand}
-                onChange={addPublishData}>
+                onChange={addPublishData}
+              >
                 <option value=""></option>
                 <option value="other">Другая марка</option>
                 <option value="Богдан">Богдан</option>
@@ -422,6 +430,107 @@ const Spares = () => {
                 <option value="Toyota">Toyota</option>
                 <option value="Volkswagen">Volkswagen</option>
                 <option value="Volvo">Volvo</option>
+              </select>
+            </div>
+          )}
+
+        {publishData.spareFor === "moto" && (
+          <div className="selectdiv flex flex-col">
+            <label className="text-[14px]" for="motoSpareType">
+              Вид мотозапчасти
+            </label>
+            <select
+              className="border border-gray-400 rounded-md py-[8px] px-[5px]  w-[280px] outline-none text-black"
+              name="motoSpareType"
+              id="motoSpareType"
+              value={publishData.motoSpareType}
+              onChange={addPublishData}
+            >
+              <option value=""></option>
+              <option value="motoSpares">Мотозапчасти</option>
+              <option value="motoEquipment">Мотоэкипировка</option>
+              <option value="motoAccessories">Мото аксессуары</option>
+            </select>
+          </div>
+        )}
+
+        {publishData.spareFor === "moto" &&
+          publishData.motoSpareType === "motoEquipment" && (
+            <div className="selectdiv flex flex-col">
+              <label className="text-[14px]" for="motoEquipmentSpareType">
+                Марка
+              </label>
+              <select
+                className="border border-gray-400 rounded-md py-[8px] px-[5px]  w-[280px] outline-none text-black"
+                name="motoEquipmentSpareType"
+                id="motoEquipmentSpareType"
+                value={publishData.motoEquipmentSpareType}
+                onChange={addPublishData}
+              >
+                <option value=""></option>
+                <option value="helmets">Мотошлемы</option>
+                <option value="motoJackets">Мотокуртки</option>
+                <option value="motoGloves">Мотоперчатки</option>
+                <option value="motoBoots">Мотоботинки</option>
+                <option value="motorcyclePants">Мотоштаны</option>
+                <option value="motoProtection">Мотозащита</option>
+                <option value="motoGlasses">Мотоочки</option>
+                <option value="motosuitsAndOveralls">
+                  Мотокостюмы и комбинезоны
+                </option>
+                <option value="motorcycleEquipmentGeneral">
+                  Мотоэкипировка, общее
+                </option>
+                <option value="other">Другой</option>
+              </select>
+            </div>
+          )}
+
+        {publishData.spareFor === "moto" &&
+          publishData.motoSpareType === "motoAccessories" && (
+            <div className="selectdiv flex flex-col">
+              <label className="text-[14px]" for="motoEquipmentSpareType">
+                Марка
+              </label>
+              <select
+                className="border border-gray-400 rounded-md py-[8px] px-[5px]  w-[280px] outline-none text-black"
+                name="motoEquipmentSpareType"
+                id="motoEquipmentSpareType"
+                value={publishData.motoEquipmentSpareType}
+                onChange={addPublishData}
+              >
+                <option value=""></option>
+                <option value="Aprilia">Aprilia</option>
+                <option value="Blata">Blata</option>
+                <option value="BM">BM</option>
+                <option value="BMW">BMW</option>
+                <option value="Buell">Buell</option>
+                <option value="Cagiva">Cagiva</option>
+                <option value="CPI">CPI</option>
+                <option value="CZ">CZ</option>
+                <option value="Ducati">Ducati</option>
+                <option value="Harley-Davidson">Harley-Davidson</option>
+                <option value="Honda">Honda</option>
+                <option value="Husqvarna">Husqvarna</option>
+                <option value="Hyosung">Hyosung</option>
+                <option value="Jawa">Jawa</option>
+                <option value="Kawasaki">Kawasaki</option>
+                <option value="KTM">KTM</option>
+                <option value="Kymco">Kymco</option>
+                <option value="Moto Guzzi">Moto Guzzi</option>
+                <option value="MV Agusta">MV Agusta</option>
+                <option value="Pannonia">Pannonia</option>
+                <option value="Regal-Raptor">Regal-Raptor</option>
+                <option value="Suzuki">Suzuki</option>
+                <option value="Triumph">Triumph</option>
+                <option value="Yamaha">Yamaha</option>
+                <option value="Днепр">Днепр</option>
+                <option value="ЗИД">ЗИД</option>
+                <option value="Иж">Иж</option>
+                <option value="Минск">Минск</option>
+                <option value="Тула">Тула</option>
+                <option value="Урал">Урал</option>
+                <option value="other">Другая марка</option>
               </select>
             </div>
           )}
