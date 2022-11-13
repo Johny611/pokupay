@@ -197,10 +197,10 @@ const Cars = () => {
               value={publishData.condition}
               onChange={addPublishData}>
               <option value=""></option>
-              <option value="">Отличное</option>
-              <option value="">Хорошее</option>
-              <option value="">Среднее</option>
-              <option value="">Требует ремонта</option>
+              <option value="excellent">Отличное</option>
+              <option value="good">Хорошее</option>
+              <option value="middle">Среднее</option>
+              <option value="repairRequired">Требует ремонта</option>
             </select>
           </div>
           <div className="selectdiv flex flex-col">
