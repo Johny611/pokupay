@@ -1,9 +1,9 @@
 import React from "react";
 import { Input, Checkbox } from "@material-tailwind/react";
 import { useDispatch, useSelector } from "react-redux";
-import { setPublish } from "../../features/publishSlice";
+import { setPublish } from "../../../features/publishSlice";
 
-const LookingForJob = () => {
+const Vacancy = () => {
   const dispatch = useDispatch();
   const publishData = useSelector((state) => state.publishData.data);
 
@@ -30,7 +30,6 @@ const LookingForJob = () => {
                 name="fromPrice"
                 value={publishData.fromPrice}
                 id="priceFrom"
-                required="true"
               />
             </div>
             <div className="flex flex-col max-w-[110px]">
@@ -44,15 +43,15 @@ const LookingForJob = () => {
                 name="priceTo"
                 value={publishData.priceTo}
                 id="priceTo"
-                required="true"
               />
             </div>
-            <div>
+            <div className="">
               <select
                 onChange={addPublishData}
                 value={publishData.currency}
                 name="currency"
-                className="bg-[#f2f2f3] outline-none ml-[5px] p-[9px]">
+                className="bg-[#f2f2f3] outline-none ml-[5px] p-[9px] minimal"
+              >
                 <option value="sum">Сум</option>
                 <option value="ue">у.е</option>
               </select>
@@ -66,7 +65,8 @@ const LookingForJob = () => {
                 publishData.salary === "hourly"
                   ? "bg-[#febe32]"
                   : "bg-[#f2f2f3]"
-              }`}>
+              }`}
+            >
               За час
             </button>
             <button
@@ -76,7 +76,8 @@ const LookingForJob = () => {
                 publishData.salary === "monthly"
                   ? "bg-[#febe32]"
                   : "bg-[#f2f2f3]"
-              }`}>
+              }`}
+            >
               За месяц
             </button>
           </div>
@@ -84,7 +85,7 @@ const LookingForJob = () => {
       </div>
       <div className="flex flex-col gap-3 ">
         <div className="flex flex-wrap gap-4 my-3">
-          <div className="flex flex-col">
+          <div className="selectdiv flex flex-col">
             <label className="text-[14px]" for="employmentType">
               Тип занятости
             </label>
@@ -95,7 +96,8 @@ const LookingForJob = () => {
               value={publishData.employmentType}
               onChange={(e) =>
                 dispatch(setPublish({ employmentType: e.target.value }))
-              }>
+              }
+            >
               <option value=""></option>
               <option value="fullTime">Полная занятость</option>
               <option value="partTime">Частичная занятость</option>
@@ -104,7 +106,7 @@ const LookingForJob = () => {
               <option value="volunteering">Волонтерство</option>
             </select>
           </div>
-          <div className="flex flex-col">
+          <div className="selectdiv flex flex-col">
             <label className="text-[14px]" for="schedule">
               График работы
             </label>
@@ -115,7 +117,8 @@ const LookingForJob = () => {
               value={publishData.schedule}
               onChange={(e) =>
                 dispatch(setPublish({ schedule: e.target.value }))
-              }>
+              }
+            >
               <option value=""></option>
               <option value="fullDay">Полный день</option>
               <option value="shiftWork">Сменный график</option>
@@ -123,7 +126,7 @@ const LookingForJob = () => {
               <option value="shiftMethod">Вахтовый метод</option>
             </select>
           </div>
-          <div className="flex flex-col">
+          <div className="selectdiv flex flex-col">
             <label className="text-[14px]" for="experience">
               Опыт работы
             </label>
@@ -134,7 +137,8 @@ const LookingForJob = () => {
               value={publishData.experience}
               onChange={(e) =>
                 dispatch(setPublish({ experience: e.target.value }))
-              }>
+              }
+            >
               <option value=""></option>
               <option value="noExperience">Без опыта</option>
               <option value="1-3">От 1 года до 3 лет</option>
@@ -142,7 +146,7 @@ const LookingForJob = () => {
               <option value="above-6">Более 6 лет</option>
             </select>
           </div>
-          <div className="flex flex-col">
+          <div className="selectdiv flex flex-col">
             <label className="text-[14px]" for="education">
               Образование
             </label>
@@ -153,7 +157,8 @@ const LookingForJob = () => {
               value={publishData.education}
               onChange={(e) =>
                 dispatch(setPublish({ education: e.target.value }))
-              }>
+              }
+            >
               <option value=""></option>
               <option value="high">Высшее</option>
               <option value="incompleteHigh">Незаконченное высшее</option>
@@ -162,7 +167,24 @@ const LookingForJob = () => {
             </select>
           </div>
         </div>
-
+        <div>
+          <Input
+            name="company"
+            onChange={addPublishData}
+            color="orange"
+            variant="standard"
+            label="Название компании"
+          />
+        </div>
+        <div>
+          <Input
+            name="workAddress"
+            onChange={addPublishData}
+            color="orange"
+            variant="standard"
+            label="Рабочий адрес"
+          />
+        </div>
         <Checkbox
           defaultChecked={false}
           name="remoteJob"
@@ -182,9 +204,41 @@ const LookingForJob = () => {
           color="orange"
           label="Рекрутинг онлайн"
         />
+        <div>
+          <p>Наличие транспорта</p>
+          <div className="flex gap-4 xs:flex-col">
+            <Checkbox
+              name="auto"
+              onChange={(e) =>
+                dispatch(setPublish({ [e.target.name]: e.target.checked }))
+              }
+              id="auto"
+              color="orange"
+              label="Авто"
+            />
+            <Checkbox
+              name="moped"
+              onChange={(e) =>
+                dispatch(setPublish({ [e.target.name]: e.target.checked }))
+              }
+              id="moped"
+              color="orange"
+              label="Мопед"
+            />
+            <Checkbox
+              name="bike"
+              onChange={(e) =>
+                dispatch(setPublish({ [e.target.name]: e.target.checked }))
+              }
+              id="bike"
+              color="orange"
+              label="Велосипед"
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
 };
 
-export default LookingForJob;
+export default Vacancy;

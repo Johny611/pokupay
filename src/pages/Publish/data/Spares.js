@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setPublish } from "../../../features/publishSlice";
-import Condition from "./Condition";
+import Condition from "../components/Condition";
 
 const Spares = () => {
   const dispatch = useDispatch();

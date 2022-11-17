@@ -13,21 +13,23 @@ const BusinessType = () => {
         <button
           name="personal"
           onClick={() => dispatch(setPublish({ personal: "personal" }))}
-          className={`py-[5px] w-[150px] rounded-[5px] ${
+          className={`py-[2px] w-[150px] rounded-[5px] ${
             publishData.personal === "personal"
               ? "bg-[#febe32]"
               : "bg-[#f2f2f3]"
-          }`}>
+          }`}
+        >
           Частное лицо
         </button>
         <button
           name="personal"
           onClick={() => dispatch(setPublish({ personal: "business" }))}
-          className={`py-[5px] w-[150px] rounded-[5px]  ${
+          className={`py-[2px] w-[150px] rounded-[5px]  ${
             publishData.personal === "business"
               ? "bg-[#febe32]"
               : "bg-[#f2f2f3]"
-          }`}>
+          }`}
+        >
           Бизнес
         </button>
       </div>

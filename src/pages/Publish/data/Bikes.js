@@ -2,7 +2,7 @@ import React from "react";
 import { Input } from "@material-tailwind/react";
 import { useDispatch } from "react-redux";
 import { setPublish } from "../../../features/publishSlice";
-import Condition from "./Condition";
+import Condition from "../components/Condition";
 
 const Bikes = () => {
   const dispatch = useDispatch();

@@ -13,24 +13,34 @@ import { IoChevronDownSharp, IoCaretForward } from "react-icons/io5";
 import { categories } from "../components/Categories/CategoryList";
 import Price from "./Publish/components/Price";
 import { v4 } from "uuid";
-import Vacancy from "./Publish/Vacancy";
-import LookingForJob from "./Publish/LookingForJob";
+import Vacancy from "./Publish/data/Vacancy";
+import LookingForJob from "./Publish/data/LookingForJob";
 import { useDispatch, useSelector } from "react-redux";
 import { setPublish, clearPublish } from "../features/publishSlice";
 import BusinessType from "./Publish/components/BusinessType";
 import Images from "./Publish/components/Images";
 import Contacts from "./Publish/components/Contacts";
-import Courses from "./Publish/components/Courses";
-import Jurisdic from "./Publish/components/Jurisdic";
-import Financial from "./Publish/components/Financial";
-import Internet from "./Publish/components/Internet";
-import Cars from "./Publish/components/Cars";
-import Trucks from "./Publish/components/Trucks";
-import Moto from "./Publish/components/Moto";
-import Bikes from "./Publish/components/Bikes";
-import Spares from "./Publish/components/Spares";
-import Transportation from "./Publish/components/Transportation";
-import Bus from "./Publish/components/Bus";
+import Courses from "./Publish/data/Courses";
+import Jurisdic from "./Publish/data/Jurisdic";
+import Financial from "./Publish/data/Financial";
+import Internet from "./Publish/data/Internet";
+import Cars from "./Publish/data/Cars";
+import Trucks from "./Publish/data/Trucks";
+import Moto from "./Publish/data/Moto";
+import Bikes from "./Publish/data/Bikes";
+import Spares from "./Publish/data/Spares";
+import Transportation from "./Publish/data/Transportation";
+import Bus from "./Publish/data/Bus";
+import DailyHourlyApartment from "./Publish/data/DailyHourlyApartment";
+import LongTermApartment from "./Publish/data/LongTermApartment";
+import LongTermHouse from "./Publish/data/LongTermHouse";
+import Room from "./Publish/data/Room";
+import Land from "./Publish/data/Land";
+import Garage from "./Publish/data/Garage";
+import CommercialPlaces from "./Publish/data/CommercialPlaces";
+import AbroadEstate from "./Publish/data/AbroadEstate";
+import PhoneSpares from "./Publish/data/PhoneSpares";
+import PhoneAccessories from "./Publish/data/PhoneAccessories";
 
 const phoneBrands = [
   { name: "acer", value: "Acer" },
@@ -383,6 +393,16 @@ const Publish = () => {
           {/* <Spares /> */}
           {/* <Transportation /> */}
           {/* <Bus /> */}
+          {/* <DailyHourlyApartment /> */}
+          {/* <LongTermApartment /> */}
+          {/* <LongTermHouse /> */}
+          {/* <Room /> */}
+          {/* <Land /> */}
+          {/* <Garage /> */}
+          {/* <CommercialPlaces /> */}
+          {/* <AbroadEstate /> */}
+          {/* <PhoneSpares /> */}
+          <PhoneAccessories />
         </div>
       </section>
 
