@@ -1,4 +1,6 @@
 import React from "react";
+import Checkboxes from "../components/Checkboxes";
+import Options from "../components/Options";
 
 const installments = [
   { name: "yes", rus: "Да", eng: "Yes", uzb: "Bor" },
@@ -126,21 +128,21 @@ const brands = [
 ];
 
 const memory = [
-  { name: "4", rus: "4ГБ", eng: "4GB" },
-  { name: "8", rus: "8ГБ", eng: "8GB" },
-  { name: "16", rus: "16ГБ", eng: "16GB" },
-  { name: "32", rus: "32ГБ", eng: "32GB" },
-  { name: "64", rus: "64ГБ", eng: "64GB" },
-  { name: "128", rus: "128ГБ", eng: "128GB" },
-  { name: "256", rus: "256ГБ", eng: "256GB" },
-  { name: "512", rus: "512ГБ", eng: "512GB" },
-  { name: "1024", rus: "1024ГБ", eng: "1024GB" },
-  { name: "1024", rus: "Другое", eng: "Other", uzb: "Boshqa" },
+  { name: "4GB", rus: "4ГБ", eng: "4GB" },
+  { name: "8GB", rus: "8ГБ", eng: "8GB" },
+  { name: "16GB", rus: "16ГБ", eng: "16GB" },
+  { name: "32GB", rus: "32ГБ", eng: "32GB" },
+  { name: "64GB", rus: "64ГБ", eng: "64GB" },
+  { name: "128GB", rus: "128ГБ", eng: "128GB" },
+  { name: "256GB", rus: "256ГБ", eng: "256GB" },
+  { name: "512GB", rus: "512ГБ", eng: "512GB" },
+  { name: "1024GB", rus: "1024ГБ", eng: "1024GB" },
+  { name: "other", rus: "Другое", eng: "Other", uzb: "Boshqa" },
 ];
 
 const simNumbers = [
-  { name: "1", rus: "1 сим-карта", eng: "1 sim card", uzb: "1 sim-karta" },
-  { name: "2", rus: "2 сим-карты", eng: "2 sim cards", uzb: "2 sim-karta" },
+  { name: "1sim", rus: "1 сим-карта", eng: "1 sim card", uzb: "1 sim-karta" },
+  { name: "2sim", rus: "2 сим-карты", eng: "2 sim cards", uzb: "2 sim-karta" },
 ];
 
 const operatingSystem = [
@@ -156,14 +158,43 @@ const operatingSystem = [
 ];
 
 const diagonal = [
-  { name: "", rus: "", eng: "", uzb: "" },
-  { name: "", rus: "", eng: "", uzb: "" },
-  { name: "", rus: "", eng: "", uzb: "" },
-  { name: "", rus: "", eng: "", uzb: "" },
+  { name: "till4", rus: 'До 4"', eng: 'Till 4"', uzb: '4" gacha' },
+  { name: "4.1-4.5", rus: '4.1"-4.5"', eng: '4.1"-4.5"', uzb: '4.1"-4.5"' },
+  { name: "4.5-5", rus: '4.5"-5"', eng: '4.5"-5"', uzb: '4.5"-5"' },
+  { name: "5.1-5.5", rus: '5.1"-5.5"', eng: '5.1"-5.5"', uzb: '5.1"-5.5"' },
+  { name: "5.55-6", rus: '5.55"-6"', eng: '5.55"-6"', uzb: '5.55"-6"' },
+  {
+    name: "moreThan6",
+    rus: 'Более 6"',
+    eng: 'More than 6"',
+    uzb: '6" dan yuqori',
+  },
+  { name: "other", rus: "Другое", eng: "Other", uzb: "Boshqa" },
 ];
 
 const Phones = () => {
-  return <div></div>;
+  return (
+    <div>
+      <Options
+        itemName={"installments"}
+        title={"В рассрочку"}
+        items={installments}
+      />
+      <Options itemName={"brand"} title={"Марка телефона"} items={brands} />
+      <Checkboxes title={"Объем встроенной памяти"} items={memory} />
+      <Checkboxes title={"Кол-во сим карт"} items={simNumbers} />
+      <Options
+        itemName={"operatingSystem"}
+        title={"Операционная система"}
+        items={operatingSystem}
+      />
+      <Options
+        itemName={"diagonal"}
+        title={"Диагональ экрана"}
+        items={diagonal}
+      />
+    </div>
+  );
 };
 
 export default Phones;
