@@ -54,6 +54,9 @@ import AccessoriesForPhotoVideoCameras from "./Publish/data/AccessoriesForPhotoV
 import MediaPlayer from "./Publish/data/MediaPlayer";
 import TV from "./Publish/data/TV";
 import Projectors from "./Publish/data/Projectors";
+import Mp3Players from "./Publish/data/Mp3Players";
+import MusicalCenter from "./Publish/data/MusicalCenter";
+import AmplifiersReceivers from "./Publish/data/AmplifiersReceivers";
 
 const phoneBrands = [
   { name: "acer", value: "Acer" },
@@ -418,7 +421,10 @@ const Publish = () => {
           {/* <AccessoriesForPhotoVideoCameras /> */}
           {/* <MediaPlayer /> */}
           {/* <TV /> */}
-          <Projectors />
+          {/* <Projectors /> */}
+          {/* <Mp3Players /> */}
+          {/* <MusicalCenter /> */}
+          <AmplifiersReceivers />
         </div>
       </section>
 
