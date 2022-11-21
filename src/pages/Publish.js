@@ -57,6 +57,14 @@ import Projectors from "./Publish/data/Projectors";
 import Mp3Players from "./Publish/data/Mp3Players";
 import MusicalCenter from "./Publish/data/MusicalCenter";
 import AmplifiersReceivers from "./Publish/data/AmplifiersReceivers";
+import ConsoleGames from "./Publish/data/ConsoleGames";
+import Laptops from "./Publish/data/Laptops";
+import Microwaves from "./Publish/data/Microwaves";
+import Fridge from "./Publish/data/Fridge";
+import FoodProcessorsChoppers from "./Publish/data/FoodProcessorsChoppers";
+import SteamersMulticookers from "./Publish/data/SteamersMulticookers";
+import BreadMakers from "./Publish/data/BreadMakers";
+import Dishwasher from "./Publish/data/Dishwasher";
 
 const phoneBrands = [
   { name: "acer", value: "Acer" },
@@ -228,11 +236,13 @@ const Publish = () => {
           <div>
             <div
               onClick={() => setIsCategoryOpen(!isCategoryOpen)}
-              className="select_menu">
+              className="select_menu"
+            >
               <div
                 className={`select_btn flex items-center gap-8 rounded ${
                   !category.category ? "bg-[#febe32]" : "bg-[#e0e0e0]"
-                } p-2 cursor-pointer`}>
+                } p-2 cursor-pointer`}
+              >
                 {!category.category ? (
                   <>
                     <span className="text-[17px] font-medium">
@@ -261,11 +271,13 @@ const Publish = () => {
             <div>
               <div
                 onClick={() => setIsSubCategoryOpen(!isSubCategoryOpen)}
-                className="select_menu">
+                className="select_menu"
+              >
                 <div
                   className={`select_btn flex items-center gap-8 rounded ${
                     !category.category ? "bg-[#febe32]" : "bg-[#e0e0e0]"
-                  }  p-4 cursor-pointer`}>
+                  }  p-4 cursor-pointer`}
+                >
                   {!category.subCategory ? (
                     <>
                       <span className="text-[17px] font-medium">
@@ -290,9 +302,11 @@ const Publish = () => {
                 onClick={() => {
                   setIsCurrentSubTypeOpen(!isCurrentSubTypeOpen);
                 }}
-                className="select_menu">
+                className="select_menu"
+              >
                 <div
-                  className={`select_btn flex items-center gap-8 rounded bg-[#febe32] p-4 cursor-pointer`}>
+                  className={`select_btn flex items-center gap-8 rounded bg-[#febe32] p-4 cursor-pointer`}
+                >
                   {category.type ? (
                     <>
                       <span>{category.type?.rus}</span>
@@ -326,7 +340,8 @@ const Publish = () => {
                   setIsSubCategoryOpen(true);
                 }}
                 key={item.name}
-                className="option hover:bg-[blanchedalmond] cursor-pointer flex flex-row items-center gap-1 p-2">
+                className="option hover:bg-[blanchedalmond] cursor-pointer flex flex-row items-center gap-1 p-2"
+              >
                 <img className="w-14" src={item.pic} alt="" />
                 <span className="font-medium">{item.rus}</span>
               </div>
@@ -346,7 +361,8 @@ const Publish = () => {
                   setIsCurrentSubTypeOpen(true);
                 }}
                 key={item.name}
-                className="option hover:bg-[blanchedalmond] cursor-pointer flex flex-row items-center gap-1 p-2">
+                className="option hover:bg-[blanchedalmond] cursor-pointer flex flex-row items-center gap-1 p-2"
+              >
                 <span className="font-medium">{item.rus}</span>
               </div>
             ))}
@@ -360,7 +376,8 @@ const Publish = () => {
                   setIsCurrentSubTypeOpen(false);
                 }}
                 key={item.name}
-                className="option hover:bg-[blanchedalmond] cursor-pointer flex flex-row items-center gap-1 p-2">
+                className="option hover:bg-[blanchedalmond] cursor-pointer flex flex-row items-center gap-1 p-2"
+              >
                 <span className="font-medium">{item.rus}</span>
               </div>
             ))}
@@ -377,7 +394,8 @@ const Publish = () => {
           name="description"
           id="description"
           className="border-b-2 border-[#febe32] resize-none rounded-[3px] bg-[#2126330f] w-[80%] md:w-[90%] xs:w-full min-h-[150px] outline-none p-3"
-          placeholder="Подумайте, какие подробности вы хотели бы узнать из объявления. И добавьте их в описание"></textarea>
+          placeholder="Подумайте, какие подробности вы хотели бы узнать из объявления. И добавьте их в описание"
+        ></textarea>
       </section>
 
       {/* <Price /> */}
@@ -424,7 +442,15 @@ const Publish = () => {
           {/* <Projectors /> */}
           {/* <Mp3Players /> */}
           {/* <MusicalCenter /> */}
-          <AmplifiersReceivers />
+          {/* <AmplifiersReceivers /> */}
+          {/* <ConsoleGames /> */}
+          {/* <Laptops /> */}
+          {/* <Microwaves /> */}
+          {/* <Fridge /> */}
+          {/* <FoodProcessorsChoppers /> */}
+          {/* <SteamersMulticookers /> */}
+          {/* <BreadMakers /> */}
+          <Dishwasher />
         </div>
       </section>
 
