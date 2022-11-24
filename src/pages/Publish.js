@@ -65,6 +65,30 @@ import FoodProcessorsChoppers from "./Publish/data/FoodProcessorsChoppers";
 import SteamersMulticookers from "./Publish/data/SteamersMulticookers";
 import BreadMakers from "./Publish/data/BreadMakers";
 import Dishwasher from "./Publish/data/Dishwasher";
+import Tshirts from "./Publish/data/Dresses/Tshirts";
+import Undershirt from "./Publish/data/Dresses/Undershirt";
+import Shirts from "./Publish/data/Dresses/Shirts";
+import TennisShoes from "./Publish/data/Dresses/TennisShoes";
+import Hoodie from "./Publish/data/Dresses/Hoodie";
+import Sweatshirt from "./Publish/data/Dresses/Sweatshirt";
+import Raincoat from "./Publish/data/Dresses/Raincoat";
+import LeatherJackets from "./Publish/data/Dresses/LeatherJackets";
+import WinterJackets from "./Publish/data/Dresses/WinterJackets";
+import SheepskinFurCoats from "./Publish/data/Dresses/SheepskinFurCoats";
+import Vests from "./Publish/data/Dresses/Vests";
+import Shorts from "./Publish/data/Dresses/Shorts";
+import MenJoggers from "./Publish/data/Dresses/MenJoggers";
+import MenJackets from "./Publish/data/Dresses/MenJackets";
+import Tuxedos from "./Publish/data/Dresses/Tuxedos";
+import ClassicCostumes from "./Publish/data/Dresses/ClassicCostumes";
+import MenOveralls from "./Publish/data/Dresses/MenOveralls";
+import MenPijama from "./Publish/data/Dresses/MenPijama";
+import MenTracksuits from "./Publish/data/Dresses/MenTracksuits";
+import MenSportJackets from "./Publish/data/Dresses/MenSportJackets";
+import MenSportPants from "./Publish/data/Dresses/MenSportPants";
+import Shapan from "./Publish/data/Dresses/Shapan";
+import MenSkullcaps from "./Publish/data/Dresses/MenSkullcaps";
+import Menmouslim from "./Publish/data/Dresses/Menmouslim";
 
 const phoneBrands = [
   { name: "acer", value: "Acer" },
@@ -450,7 +474,31 @@ const Publish = () => {
           {/* <FoodProcessorsChoppers /> */}
           {/* <SteamersMulticookers /> */}
           {/* <BreadMakers /> */}
-          <Dishwasher />
+          {/* <Dishwasher /> */}
+          {/* <Tshirts /> */}
+          {/* <Undershirt /> */}
+          {/* <Shirts /> */}
+          {/* <TennisShoes /> */}
+          {/* <Hoodie /> */}
+          {/* <Sweatshirt /> */}
+          {/* <Raincoat /> */}
+          {/* <LeatherJackets /> */}
+          {/* <WinterJackets /> */}
+          {/* <SheepskinFurCoats /> */}
+          {/* <Vests /> */}
+          {/* <Shorts /> */}
+          {/* <MenJoggers /> */}
+          {/* <MenJackets /> */}
+          {/* <Tuxedos /> */}
+          {/* <ClassicCostumes /> */}
+          {/* <MenOveralls /> */}
+          {/* <MenPijama /> */}
+          {/* <MenTracksuits /> */}
+          {/* <MenSportJackets /> */}
+          {/* <MenSportPants /> */}
+          {/* <Shapan /> */}
+          {/* <MenSkullcaps /> */}
+          <Menmouslim />
         </div>
       </section>
 
