@@ -89,6 +89,12 @@ import MenSportPants from "./Publish/data/Dresses/MenSportPants";
 import Shapan from "./Publish/data/Dresses/Shapan";
 import MenSkullcaps from "./Publish/data/Dresses/MenSkullcaps";
 import Menmouslim from "./Publish/data/Dresses/Menmouslim";
+import EveningDresses from "./Publish/data/Dresses/women/EveningDresses";
+import EverydayDresses from "./Publish/data/Dresses/women/EverydayDresses";
+import WomenPromDresses from "./Publish/data/Dresses/women/WomenPromDresses";
+import WomenSundresses from "./Publish/data/Dresses/women/WomenSundresses";
+import Tunics from "./Publish/data/Dresses/women/Tunics";
+import Bodysuit from "./Publish/data/Dresses/women/Bodysuit";
 
 const phoneBrands = [
   { name: "acer", value: "Acer" },
@@ -498,7 +504,13 @@ const Publish = () => {
           {/* <MenSportPants /> */}
           {/* <Shapan /> */}
           {/* <MenSkullcaps /> */}
-          <Menmouslim />
+          {/* <Menmouslim /> */}
+          {/* <EveningDresses /> */}
+          {/* <EverydayDresses /> */}
+          {/* <WomenPromDresses /> */}
+          {/* <WomenSundresses /> */}
+          {/* <Tunics /> */}
+          <Bodysuit />
         </div>
       </section>
 

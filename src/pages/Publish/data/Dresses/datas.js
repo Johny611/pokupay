@@ -354,3 +354,154 @@ export const menTracksuitsMaterial = [
   { name: "", rus: "Хлопок", eng: "", uzb: "" },
   { name: "other", rus: "Другой", eng: "Other", uzb: "Boshqa" },
 ];
+
+export const womenEveningDressesPattern = [
+  {
+    name: "polkaDots",
+    rus: "Горошек",
+    eng: "Polka dots",
+    uzb: "Polka nuqtali",
+  },
+  { name: "strip", rus: "Полоска", eng: "Strip", uzb: "Ipli" },
+  { name: "floral", rus: "Цветочный", eng: "Floral", uzb: "Gulli" },
+  { name: "cell", rus: "Клетка", eng: "Cell", uzb: "Kletkali" },
+  { name: "other", rus: "Другой", eng: "Other", uzb: "Boshqa" },
+];
+
+export const womenSleeveLength = [
+  { name: "long", rus: "Длинные", eng: "Long", uzb: "Uzun" },
+  { name: "short", rus: "Короткие", eng: "Short", uzb: "Qisqa" },
+  {
+    name: "withoutSleeve",
+    rus: "Без рукавов",
+    eng: "Without sleeves",
+    uzb: "Yenglarsiz",
+  },
+];
+
+export const womenDressDetails = [
+  { name: "", rus: "На запах", eng: "", uzb: "" },
+  { name: "", rus: "Лапша", eng: "", uzb: "" },
+  { name: "", rus: "Корсет", eng: "", uzb: "" },
+  { name: "", rus: "Перья", eng: "", uzb: "" },
+  { name: "", rus: "Шлейф", eng: "", uzb: "" },
+  { name: "", rus: "Пайетки", eng: "", uzb: "" },
+  { name: "", rus: "Вырез", eng: "", uzb: "" },
+  { name: "", rus: "Накидка", eng: "", uzb: "" },
+  { name: "", rus: "Бандажное", eng: "", uzb: "" },
+  { name: "", rus: "Разрез", eng: "", uzb: "" },
+  { name: "", rus: "Блестящее", eng: "", uzb: "" },
+  { name: "", rus: "Баска", eng: "", uzb: "" },
+  { name: "", rus: "Открытая спина", eng: "", uzb: "" },
+  { name: "", rus: "Бретели", eng: "", uzb: "" },
+  { name: "", rus: "Широкие лямки", eng: "", uzb: "" },
+  { name: "other", rus: "Другой", eng: "Other", uzb: "Boshqa" },
+];
+
+export const womenBrand = [
+  { name: "", rus: "Zara", eng: "", uzb: "" },
+  { name: "", rus: "Mango", eng: "", uzb: "" },
+  { name: "", rus: "Adidas", eng: "", uzb: "" },
+  { name: "", rus: "Massimo Dutti", eng: "", uzb: "" },
+  { name: "", rus: "Bershka", eng: "", uzb: "" },
+  { name: "", rus: "Calvin Klein", eng: "", uzb: "" },
+  { name: "", rus: "H&M", eng: "", uzb: "" },
+  { name: "", rus: "Ostin", eng: "", uzb: "" },
+  { name: "", rus: "Koton", eng: "", uzb: "" },
+  { name: "", rus: "Nike", eng: "", uzb: "" },
+  { name: "", rus: "Oodji", eng: "", uzb: "" },
+  { name: "", rus: "Levi's", eng: "", uzb: "" },
+  { name: "", rus: "Tommy Hilfiger", eng: "", uzb: "" },
+  { name: "", rus: "Pull&Bear", eng: "", uzb: "" },
+  { name: "", rus: "Reebok", eng: "", uzb: "" },
+  { name: "", rus: "Gap", eng: "", uzb: "" },
+  { name: "", rus: "Guess", eng: "", uzb: "" },
+  { name: "", rus: "Puma", eng: "", uzb: "" },
+  { name: "", rus: "Colin’s", eng: "", uzb: "" },
+  { name: "", rus: "Columbia", eng: "", uzb: "" },
+  { name: "", rus: "Demix", eng: "", uzb: "" },
+  { name: "", rus: "Fila", eng: "", uzb: "" },
+  { name: "", rus: "Under Armour", eng: "", uzb: "" },
+  { name: "", rus: "Без бренда", eng: "", uzb: "" },
+  { name: "other", rus: "Другой", eng: "Other", uzb: "Boshqa" },
+];
+
+export const womenDressLength = [
+  { name: "", rus: "Миди", eng: "", uzb: "" },
+  { name: "", rus: "Макси", eng: "", uzb: "" },
+  { name: "", rus: "Мини", eng: "", uzb: "" },
+];
+
+export const womenDressMaterial = [
+  { name: "", rus: "Штапель", eng: "", uzb: "" },
+  { name: "", rus: "Шифон", eng: "", uzb: "" },
+  { name: "", rus: "Атлас", eng: "", uzb: "" },
+  { name: "", rus: "Шёлк", eng: "", uzb: "" },
+  { name: "", rus: "Джинс", eng: "", uzb: "" },
+  { name: "", rus: "Велюр", eng: "", uzb: "" },
+  { name: "", rus: "Лён", eng: "", uzb: "" },
+  { name: "", rus: "Кожзам / экокожа", eng: "", uzb: "" },
+  { name: "", rus: "Натуральная кожа", eng: "", uzb: "" },
+  { name: "", rus: "Бархат", eng: "", uzb: "" },
+  { name: "", rus: "Кружево", eng: "", uzb: "" },
+  { name: "", rus: "Гипюр", eng: "", uzb: "" },
+  { name: "", rus: "Трикотаж", eng: "", uzb: "" },
+  { name: "", rus: "Шерсть", eng: "", uzb: "" },
+  { name: "", rus: "Хлопок", eng: "", uzb: "" },
+  { name: "other", rus: "Другой", eng: "Other", uzb: "Boshqa" },
+];
+
+export const womenDressColor = [
+  { name: "", rus: "Белый", eng: "", uzb: "" },
+  { name: "", rus: "Черный", eng: "", uzb: "" },
+  { name: "", rus: "Красный", eng: "", uzb: "" },
+  { name: "", rus: "Розовый", eng: "", uzb: "" },
+  { name: "", rus: "Желтый", eng: "", uzb: "" },
+  { name: "", rus: "Зеленый", eng: "", uzb: "" },
+  { name: "", rus: "Оранжевый", eng: "", uzb: "" },
+  { name: "", rus: "Серый", eng: "", uzb: "" },
+  { name: "", rus: "Хаки", eng: "", uzb: "" },
+  { name: "", rus: "Бежевый", eng: "", uzb: "" },
+  { name: "", rus: "Бирюзовый", eng: "", uzb: "" },
+  { name: "", rus: "Синий", eng: "", uzb: "" },
+  { name: "", rus: "Горчичный", eng: "", uzb: "" },
+  { name: "", rus: "Бордовый", eng: "", uzb: "" },
+  { name: "", rus: "Голубой", eng: "", uzb: "" },
+  { name: "", rus: "Фиолетовый", eng: "", uzb: "" },
+  { name: "", rus: "Коралловый", eng: "", uzb: "" },
+  { name: "", rus: "Коричневый", eng: "", uzb: "" },
+  { name: "", rus: "Золотой", eng: "", uzb: "" },
+  { name: "", rus: "Разноцветный", eng: "", uzb: "" },
+  { name: "other", rus: "Другой", eng: "Other", uzb: "Boshqa" },
+];
+
+export const womenDressStyle = [
+  { name: "", rus: "Рыбка", eng: "", uzb: "" },
+  { name: "", rus: "Пышные", eng: "", uzb: "" },
+  { name: "", rus: "Прямые", eng: "", uzb: "" },
+  { name: "other", rus: "Другой", eng: "Other", uzb: "Boshqa" },
+];
+
+export const womenEverydayDressesStyle = [
+  { name: "", rus: "Платья-рубашки", eng: "", uzb: "" },
+  { name: "", rus: "Платья-пиджаки", eng: "", uzb: "" },
+  { name: "", rus: "Платья-комбинации", eng: "", uzb: "" },
+  { name: "", rus: "Платья-футболки", eng: "", uzb: "" },
+  { name: "", rus: "Платья-футляр", eng: "", uzb: "" },
+  { name: "", rus: "Платья-трапеции", eng: "", uzb: "" },
+  { name: "", rus: "Платья-халаты", eng: "", uzb: "" },
+  { name: "other", rus: "Другой", eng: "Other", uzb: "Boshqa" },
+];
+
+export const womenTshirtsView = [
+  { name: "", rus: "Оверсайз", eng: "", uzb: "" },
+  { name: "", rus: "Поло", eng: "", uzb: "" },
+  { name: "", rus: "Кроп", eng: "", uzb: "" },
+  { name: "other", rus: "Другой", eng: "Other", uzb: "Boshqa" },
+];
+
+export const womenTshirtsPattern = [
+  { name: "", rus: "Принт", eng: "", uzb: "" },
+  { name: "", rus: "Однотонный", eng: "", uzb: "" },
+  { name: "other", rus: "Другой", eng: "Other", uzb: "Boshqa" },
+];
