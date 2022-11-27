@@ -95,6 +95,21 @@ import WomenPromDresses from "./Publish/data/Dresses/women/WomenPromDresses";
 import WomenSundresses from "./Publish/data/Dresses/women/WomenSundresses";
 import Tunics from "./Publish/data/Dresses/women/Tunics";
 import Bodysuit from "./Publish/data/Dresses/women/Bodysuit";
+import Sweaters from "./Publish/data/Dresses/women/Sweaters";
+import Skirts from "./Publish/data/Dresses/women/Skirts";
+import Outwear from "./Publish/data/Dresses/women/Outwear";
+import LeatherJacket from "./Publish/data/Dresses/women/LeatherJacket";
+import Bombers from "./Publish/data/Dresses/women/Bombers";
+import Jeans from "./Publish/data/Dresses/women/Jeans";
+import WomenShorts from "./Publish/data/Dresses/women/WomenShorts";
+import WomanPants from "./Publish/data/Dresses/women/WomanPants";
+import WomenCostumes from "./Publish/data/Dresses/women/WomenCostumes";
+import WomenJackets from "./Publish/data/Dresses/women/WomenJackets";
+import HomeDress from "./Publish/data/Dresses/women/HomeDress";
+import NationalDress from "./Publish/data/Dresses/women/NationalDress";
+import Mouslim from "./Publish/data/Dresses/women/Mouslim";
+import BeachTunics from "./Publish/data/Dresses/women/BeachTunics";
+import BeachPareos from "./Publish/data/Dresses/women/BeachPareos";
 
 const phoneBrands = [
   { name: "acer", value: "Acer" },
@@ -510,7 +525,22 @@ const Publish = () => {
           {/* <WomenPromDresses /> */}
           {/* <WomenSundresses /> */}
           {/* <Tunics /> */}
-          <Bodysuit />
+          {/* <Bodysuit /> */}
+          {/* <Sweaters /> */}
+          {/* <Skirts /> */}
+          {/* <Outwear /> */}
+          {/* <LeatherJacket /> */}
+          {/* <Bombers /> */}
+          {/* <WomenShorts /> */}
+          {/* <Jeans /> */}
+          {/* <WomanPants /> */}
+          {/* <WomenCostumes /> */}
+          {/* <WomenJackets /> */}
+          {/* <HomeDress /> */}
+          {/* <NationalDress /> */}
+          {/* <Mouslim /> */}
+          {/* <BeachTunics /> */}
+          <BeachPareos />
         </div>
       </section>
 

@@ -128,7 +128,7 @@ select option {
     top: 40%;
     height: 34px;
     padding: 6px 0px 0px 8px;
-    border-left: 1px solid gray;
+    border-left: 1px solid #8080803b;
 }
 
 /* IE11 hide native button (thanks Matt!) */

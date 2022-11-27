@@ -5,7 +5,7 @@ import {
   size,
   womenTshirtsView,
   womenTshirtsPattern,
-  womenDressMaterial,
+  womenShirtsMaterial,
   womenDressColor,
 } from "../datas.js";
 
@@ -22,7 +22,7 @@ const Tshirts = () => {
       <Options
         itemName={"material"}
         title={"Материал"}
-        items={womenDressMaterial}
+        items={womenShirtsMaterial}
       />
       <Options itemName={"view"} title={"Вид"} items={womenTshirtsView} />
       <Options

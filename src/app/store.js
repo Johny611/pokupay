@@ -3,6 +3,7 @@ import userReducer from "../features/userSlice";
 import publishReducer from "../features/publishSlice";
 import imagesSlice from "../features/imagesSlice";
 import categoryReducer from "../features/categorySlice";
+import languageReducer from "../features/languageSlice";
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     images: imagesSlice,
     publishData: publishReducer,
     categoryData: categoryReducer,
+    language: languageReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
