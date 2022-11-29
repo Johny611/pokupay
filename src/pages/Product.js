@@ -8,6 +8,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { useSelector } from "react-redux";
 import timestampToDate from "timestamp-to-date";
+import { IoEye, IoHeartOutline, IoHeartSharp } from "react-icons/io5";
 
 const Product = () => {
   const language = useSelector((state) => state.language.data);
@@ -66,14 +67,22 @@ const Product = () => {
           </Slider>
         </div>
         <div className="description_comments bg-white my-4 mx-0 rounded-md">
-          <div className="flex gap-8 border-b border-[#80808052] pt-4">
-            <Typography
-              className="border-b-[3px] border-[#febe32] pb-4 px-8 text-[#febe32]"
-              variant="lead"
-            >
-              Описание
-            </Typography>
-            <Typography variant="lead">Комментарии</Typography>
+          <div className="flex justify-between items-center gap-8 border-b">
+            <div className="flex">
+              <Typography
+                className="border-b-[3px] border-[#febe32] px-8 py-[8px] text-[#febe32]"
+                variant="lead"
+              >
+                Описание
+              </Typography>
+              <Typography className=" px-8 py-[8px]" variant="lead">
+                Комментарии
+              </Typography>
+            </div>
+            <div className="text-[25px] px-3">
+              <IoHeartOutline />
+              {/* <IoHeartSharp /> */}
+            </div>
           </div>
           <div className="">
             <div className="product_details p-4 flex gap-3">
@@ -93,11 +102,11 @@ const Product = () => {
             <div className="description p-4">
               <Typography variant="small">{product.description}</Typography>
             </div>
-            <div className="py-4 pl-2 flex gap-4">
-              <Typography variant="small" className="text-gray-500">
-                Просмотров 1099
+            <div className="py-4 pr-3 pl-3 flex justify-between gap-4 border-t border-[#febe32]">
+              <Typography variant="small" className="flex text-gray-700">
+                <IoEye style={{ fontSize: "19px" }} /> 1099
               </Typography>
-              <Typography variant="small" className="text-gray-500">
+              <Typography variant="small" className="text-gray-700">
                 Опубликовано{" "}
                 {timestampToDate(
                   product.createdAt?.seconds * 1000,
@@ -108,7 +117,16 @@ const Product = () => {
           </div>
         </div>
       </div>
-      <div className="col-span-4">Side</div>
+      <div className="side col-span-4">
+        <div className="user bg-white p-3 rounded-md">
+          <Typography
+            variant="small"
+            className="text-gray-800 text-xs font-semibold"
+          >
+            ПОЛЬЗОВАТЕЛЬ
+          </Typography>
+        </div>
+      </div>
     </div>
   );
 };

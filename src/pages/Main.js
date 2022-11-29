@@ -31,7 +31,6 @@ function Main() {
     <div className="flex flex-col items-center max-w-[60%] lg:max-w-[80%] xs:max-w-[100%] xs:bg-[#212633]">
       <Search />
       {windowSize.innerWidth <= 425 ? <MobileCategories /> : <Categories />}
-      <Ads />
       <div className="w-full max-w-[98%]">
         <h3 className="xs:text-white mx-0 my-4 pl-3 pt-3 text-2xl font-semibold">
           Рекомендованное Вам
