@@ -434,6 +434,8 @@ const Publish = () => {
       <section className="border-t-2 border-[#febe32] bg-white p-4">
         <h3 className="text-lg mb-4 font-medium">Описание</h3>
         <textarea
+          autoComplete="off"
+          rows="11"
           value={publishData.description}
           onChange={addPublishData}
           name="description"
