@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Typography } from "@material-tailwind/react";
 import { doc, getDoc } from "firebase/firestore";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { db } from "../firebase";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -14,6 +14,7 @@ const Product = () => {
   const language = useSelector((state) => state.language.data);
   const [product, setProduct] = useState({});
   const params = useParams();
+  let user = useSelector((state) => state.user.user);
 
   useEffect(() => {
     const getProduct = async () => {
@@ -54,15 +55,17 @@ const Product = () => {
               {product.title}
             </Typography>
             <Typography className="text-2xl font-semibold mb-3" variant="h4">
-              {product.price || product.fromPrice}{" "}
+              {product.price || product.fromPrice}
               {product.currency === "sum" ? `сум` : `$`}
             </Typography>
           </div>
-          <Slider {...settings}>
+          <Slider {...settings} className="">
             {product?.photos?.map((item) => (
-              <div>
-                <img src={item.url} alt={item.name} />
-              </div>
+              <img
+                src={item.url}
+                alt={item.name}
+                className="w-full object-contain"
+              />
             ))}
           </Slider>
         </div>
@@ -119,12 +122,62 @@ const Product = () => {
       </div>
       <div className="side col-span-4">
         <div className="user bg-white p-3 rounded-md">
-          <Typography
-            variant="small"
-            className="text-gray-800 text-xs font-semibold"
-          >
-            ПОЛЬЗОВАТЕЛЬ
-          </Typography>
+          <div className="flex gap-4 mb-4">
+            <div>
+              <img
+                src={require("../assets/icons/user.png")}
+                className="w-10 object-contain rounded-full"
+              />
+            </div>
+            <div>
+              <Typography
+                variant="small"
+                className="text-base font-semibold text-[#212633]"
+              >
+                Имя пользователя
+              </Typography>
+              <Typography variant="small" className="text-xs text-gray-700">
+                На PokuPay с январь 2021
+              </Typography>
+              <Typography
+                variant="small"
+                className="text-[13px] text-[#212633] font-semibold "
+              >
+                Онлайн в 9:55
+              </Typography>
+            </div>
+          </div>
+          <div>
+            <div className="flex gap-[8px] items-center m-2">
+              <img src={require("../assets/icons/phone.png")} />
+              <Typography variant="small" className="font-semibold">
+                +9989********
+              </Typography>
+            </div>
+            <div className="flex gap-[8px] items-center m-2">
+              <img
+                src={require("../assets/icons/location1.png")}
+                className="ml-1"
+              />
+              <Typography variant="small" className="font-semibold">
+                Ташкент, Мирзо Улугбек
+              </Typography>
+            </div>
+          </div>
+          <div className="mt-4 flex justify-center gap-4">
+            <Link
+              to={`/chat`}
+              className="bg-[#febe32] py-[10px] px-[20px] font-semibold rounded-md w-1/2 text-center"
+            >
+              Написать
+            </Link>
+            <Link
+              to={`/profile`}
+              className="bg-[#febe32] py-[10px] px-[20px] font-semibold rounded-md w-1/2 text-center"
+            >
+              Профиль
+            </Link>
+          </div>
         </div>
       </div>
     </div>

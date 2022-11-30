@@ -130,7 +130,7 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div className="app flex flex-col items-center min-h-full bg-[#f8f8ff]">
+    <div className="app flex flex-col items-center min-h-full">
       <Header />
       <Routes>
         <Route index element={<Main />} />
