@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Typography } from "@material-tailwind/react";
+import { Tooltip, Typography } from "@material-tailwind/react";
 import { doc, getDoc } from "firebase/firestore";
 import { Link, useParams } from "react-router-dom";
 import { db } from "../firebase";
@@ -8,7 +8,12 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { useSelector } from "react-redux";
 import timestampToDate from "timestamp-to-date";
-import { IoEye, IoHeartOutline, IoHeartSharp } from "react-icons/io5";
+import {
+  IoEye,
+  IoHeartOutline,
+  IoHeartSharp,
+  IoAlertCircleOutline,
+} from "react-icons/io5";
 
 const Product = () => {
   const language = useSelector((state) => state.language.data);
@@ -73,12 +78,12 @@ const Product = () => {
           <div className="flex justify-between items-center gap-8 border-b">
             <div className="flex">
               <Typography
-                className="border-b-[3px] border-[#febe32] px-8 py-[8px] text-[#febe32]"
+                className="border-b-[3px] border-[#febe32] px-8 py-[8px] text-[#febe32] text-base"
                 variant="lead"
               >
                 Описание
               </Typography>
-              <Typography className=" px-8 py-[8px]" variant="lead">
+              <Typography className="px-8 py-[8px] text-base" variant="lead">
                 Комментарии
               </Typography>
             </div>
@@ -91,13 +96,13 @@ const Product = () => {
             <div className="product_details p-4 flex gap-3">
               <Typography
                 variant="small"
-                className="p-[8px] rounded-[5px] bg-[#febe32]"
+                className="p-[8px] rounded-[5px] bg-[#21263321]"
               >
                 {params.category}
               </Typography>
               <Typography
                 variant="small"
-                className="p-[8px] rounded-[5px] bg-[#febe32]"
+                className="p-[8px] rounded-[5px] bg-[#21263321]"
               >
                 {params.categoryType}
               </Typography>
@@ -178,6 +183,28 @@ const Product = () => {
               Профиль
             </Link>
           </div>
+        </div>
+        <div className="rating_box bg-white my-[10px] rounded-md p-[10px] text-center">
+          <Typography variant="small" className="text-[#212633] font-semibold">
+            Рейтинг 4.5
+          </Typography>
+        </div>
+        <div className="buy_box bg-white flex flex-col gap-4 p-[10px] rounded-md text-center ">
+          <div className="flex gap-2 justify-end items-center">
+            <Typography variant="small" className="text-red-700">
+              Скоро будет доступно
+            </Typography>
+            <IoAlertCircleOutline className="text-[25px] text-red-700" />
+          </div>
+          <Typography variant="small">
+            Этот продавец может отправить товар с доставкой
+          </Typography>
+          <Link
+            className="bg-[#febe32] p-[10px] rounded-md font-semibold"
+            to={`/product/${params.category}/${params.categoryType}/${params.productID}`}
+          >
+            Купить с доставкой
+          </Link>
         </div>
       </div>
     </div>
