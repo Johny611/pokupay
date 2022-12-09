@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Tooltip, Typography } from "@material-tailwind/react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Textarea, Typography, Button } from "@material-tailwind/react";
 import { doc, getDoc } from "firebase/firestore";
+import { serverTimestamp } from "firebase/database";
 import { Link, useParams } from "react-router-dom";
 import { db } from "../firebase";
 import "slick-carousel/slick/slick.css";
@@ -13,13 +16,19 @@ import {
   IoHeartOutline,
   IoHeartSharp,
   IoAlertCircleOutline,
+  IoCall,
+  IoAttachSharp,
 } from "react-icons/io5";
+import useMessages from "../hooks/messages";
 
 const Product = () => {
   const language = useSelector((state) => state.language.data);
+  const [chatImage, setChatImage] = useState(null);
   const [product, setProduct] = useState({});
   const params = useParams();
   let user = useSelector((state) => state.user.user);
+  const [message, setMessage] = useState("");
+  const [sendMessageFromProduct] = useMessages();
 
   useEffect(() => {
     const getProduct = async () => {
@@ -43,6 +52,24 @@ const Product = () => {
   }, []);
   console.log(product);
 
+  const handleMessage = async (e) => {
+    e.preventDefault();
+    const data = {
+      content: message,
+      displayName: user.displayName,
+      sentBy: user.uid,
+      createdAt: serverTimestamp(),
+      type: "text",
+      forBuy: `ads/${params.category}/${params.categoryType}/${params.productID}`,
+      productName: product.title,
+      photoURL: user.photoURL,
+      read: false,
+    };
+    sendMessageFromProduct(data, user.uid, params.productID);
+    setMessage("");
+    // toast here
+  };
+
   const settings = {
     dots: true,
     infinite: true,
@@ -52,10 +79,10 @@ const Product = () => {
   };
 
   return (
-    <div className="flex-1 w-[80%] max-w-5xl my-4 grid grid-cols-12 grid-rows-1 gap-4 place-items-stretch">
-      <div className="col-span-8">
-        <div className="img_container bg-white pb-8 pl-8 pr-8 rounded-md">
-          <div className="flex justify-between py-4">
+    <div className="flex-1 w-[80%] xm:w-full max-w-5xl my-4 xm:my-0 grid grid-cols-12 grid-rows-1 gap-4 place-items-stretch">
+      <div className="col-span-8 md:col-span-12">
+        <div className="img_container bg-white pb-8 px-8 xm:px-0 rounded-md">
+          <div className="flex justify-between py-4 xm:py-2 xm:px-2">
             <Typography className="text-3xl font-normal" variant="h4">
               {product.title}
             </Typography>
@@ -75,7 +102,7 @@ const Product = () => {
           </Slider>
         </div>
         <div className="description_comments bg-white my-4 mx-0 rounded-md">
-          <div className="flex justify-between items-center gap-8 border-b">
+          <div className="flex justify-between items-center border-b">
             <div className="flex">
               <Typography
                 className="border-b-[3px] border-[#febe32] px-8 py-[8px] text-[#febe32] text-base"
@@ -124,8 +151,87 @@ const Product = () => {
             </div>
           </div>
         </div>
+        <div className="bg-white rounded-md p-3">
+          <div className="flex items-center justify-between">
+            <div className="flex gap-2">
+              <img
+                className="w-11 h-11 object-contain"
+                src={require("../assets/icons/user.png")}
+              />
+              <div>
+                <Typography variant="small" className="text-base">
+                  Имя пользователя
+                </Typography>
+                <Typography
+                  variant="small"
+                  className="text-[11px] text-gray-700 "
+                >
+                  На PokuPay с январь 2021
+                </Typography>
+                <Typography
+                  variant="small"
+                  className="text-[10px] text-[#d89400]"
+                >
+                  Онлайн в 9:55
+                </Typography>
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <IoCall className="text-[#febe32] text-2xl" />
+              <Typography
+                className="font-semibold underline cursor-pointer"
+                variant="small"
+              >
+                +998XX XXX XXXX
+              </Typography>
+            </div>
+          </div>
+          <div className="my-3">
+            <Textarea
+              onChange={(e) => setMessage(e.target.value)}
+              value={message}
+              color="orange"
+              label="Напишите сообщение..."
+            />
+          </div>
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex flex-col items-stretch ">
+              <div>
+                <label className="flex text-sm cursor-pointer" for="chatImage">
+                  <IoAttachSharp className="text-3xl" />
+                  <div>
+                    <p className="text-[13px]">Прикрепить файл</p>
+                    <p className="text-xs text-gray-700">
+                      Вы можете прикрепить файлы в формате: jpg, jpeg, png
+                    </p>
+                  </div>
+                </label>
+                <input
+                  draggable
+                  placeholder="фото"
+                  type="file"
+                  name="photo"
+                  id="chatImage"
+                  aria-label="File browser example"
+                  onChange={(e) => setChatImage(e.target.files)}
+                />
+              </div>
+              <div className="flex items-center bg-[#febe3226] rounded-sm gap-2 mt-2 py-[5px] px-[10px]">
+                <IoAlertCircleOutline className="text-[20px] text-[#febe32]" />
+                <p className="text-[11px] text-[#a16f00]">
+                  Можно добавить не более 5 файлов
+                </p>
+              </div>
+            </div>
+            <div>
+              <Button onClick={handleMessage} variant="outlined" color="orange">
+                Отправить
+              </Button>
+            </div>
+          </div>
+        </div>
       </div>
-      <div className="side col-span-4">
+      <div className="side col-span-4 md:col-span-12">
         <div className="user bg-white p-3 rounded-md">
           <div className="flex gap-4 mb-4">
             <div>

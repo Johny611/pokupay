@@ -113,7 +113,6 @@ const Nav = () => {
           className="nav_link flex flex-col items-center justify-evenly flex-[0.2] h-full text-xs"
         >
           {active === item.name ? item.filledPic : item.outlinedPic}
-          <p className="text-xs font-semibold text-white">{item.name}</p>
         </Link>
       ))}
     </div>

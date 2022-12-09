@@ -183,7 +183,7 @@ function Header() {
           <div className="header_submit_ad">
             <Link
               to="publish"
-              className="bg-white py-2 px-5 rounded-lg font-medium hover:bg-[#febe32]"
+              className="bg-white py-2 px-5 rounded-lg font-semibold hover:bg-[#febe32]"
             >
               Подать обьявление
             </Link>

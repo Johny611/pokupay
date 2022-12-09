@@ -8,14 +8,36 @@ import {
   push,
   update,
 } from "firebase/database";
-import { database } from "../firebase";
+import { doc, setDoc } from "firebase/firestore";
+import { database, auth, db } from "../firebase";
 
-const useMessages = (queryList) => {
-  const sendMessage = () => {
-    set(database, "chats/", user);
+const useMessages = () => {
+  const sendMessageFromProduct = async (data, userUID, productID) => {
+    await push(ref(database, `chats/${productID}/${userUID}`), data).then(
+      () => {
+        const userRef = doc(
+          db,
+          "users",
+          auth.currentUser.uid,
+          "chats",
+          productID
+        );
+        setDoc(userRef, {
+          ref: productID,
+        })
+          .then(() => console.log("chat id uploaded to user account"))
+          .catch((err) => console.log(err));
+      }
+    );
   };
 
-  return [];
+  const sendInChat = async (data, userUID, productID) => {
+    await push(ref(database, `chats/${productID}/${userUID}`), data)
+      .then(() => console.log("message sent"))
+      .catch((err) => console.log(err));
+  };
+
+  return [sendMessageFromProduct, sendInChat];
 };
 
 export default useMessages;

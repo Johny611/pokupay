@@ -32,47 +32,49 @@ function getWindowSize() {
 }
 
 function App() {
+  const [authUser, setAuthUser] = useState(null);
   const [windowSize, setWindowSize] = useState(getWindowSize());
   const uploadedImages = useSelector((state) => state.images.data);
   const publishData = useSelector((state) => state.publishData.data);
+  const user = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
   let location = useLocation();
 
-  useEffect(() => {
-    const handleTabClose = (event) => {
-      event.preventDefault();
+  // useEffect(() => {
+  //   const handleTabClose = (event) => {
+  //     event.preventDefault();
 
-      if (uploadedImages.length !== 0) {
-        uploadedImages.map((img) => {
-          const imageRef = ref(
-            storage,
-            `/users/${auth.currentUser.uid}/ads/${publishData.title}/${img.name}`
-          );
-          return deleteObject(imageRef)
-            .then(() => {
-              console.log("image deleted");
-            })
-            .catch((err) => console.log(err));
-        });
-      }
+  //     if (uploadedImages.length !== 0) {
+  //       uploadedImages.map((img) => {
+  //         const imageRef = ref(
+  //           storage,
+  //           `/users/${auth.currentUser.uid}/ads/${publishData.title}/${img.name}`
+  //         );
+  //         return deleteObject(imageRef)
+  //           .then(() => {
+  //             console.log("image deleted");
+  //           })
+  //           .catch((err) => console.log(err));
+  //       });
+  //     }
 
-      // signOut(auth)
-      //   .then(() => {
-      //     sessionStorage.clear();
-      //     dispatch(logout());
-      //   })
-      //   .catch((error) => {
-      //     console.log(error);
-      //   });
-      return (event.returnValue = "Are you sure you want to exit?");
-    };
+  //     // signOut(auth)
+  //     //   .then(() => {
+  //     //     sessionStorage.clear();
+  //     //     dispatch(logout());
+  //     //   })
+  //     //   .catch((error) => {
+  //     //     console.log(error);
+  //     //   });
+  //     return (event.returnValue = "Are you sure you want to exit?");
+  //   };
 
-    window.addEventListener("beforeunload", handleTabClose);
+  //   window.addEventListener("beforeunload", handleTabClose);
 
-    return () => {
-      window.removeEventListener("beforeunload", handleTabClose);
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener("beforeunload", handleTabClose);
+  //   };
+  // }, []);
 
   useEffect(() => {
     function handleWindowResize() {
@@ -84,50 +86,75 @@ function App() {
     };
   }, [windowSize, location]);
 
+  // useEffect(() => {
+  //   const unsubscribe = () => {
+  //     auth.onAuthStateChanged(async (userAuth) => {
+  //       setAuthUser(userAuth);
+  //     });
+  //   };
+  //   unsubscribe();
+  // }, []);
+
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(async (userAuth) => {
-      if (userAuth) {
+    if (auth) {
+      auth.onAuthStateChanged(async (userAuth) => {
+        if (userAuth) {
+          setAuthUser(userAuth);
+        } else {
+          setAuthUser(null);
+        }
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    const dispatchUser = () => {
+      if (authUser) {
         dispatch(
           login({
-            accessToken: userAuth.accessToken,
-            balanceID: userAuth.providerData[0].uid.substring(1, 13),
-            displayName: userAuth.displayName,
-            email: userAuth.email,
-            photoURL: userAuth.photoURL,
-            providerData: userAuth.providerData,
-            uid: userAuth.uid,
-            emailVerified: userAuth.emailVerified,
-            isAnonymous: userAuth.isAnonymous,
+            accessToken: authUser.accessToken,
+            balanceID: authUser.providerData[0].uid.substring(1, 13),
+            displayName: authUser.displayName,
+            email: authUser.email,
+            photoURL: authUser.photoURL,
+            providerData: authUser.providerData,
+            uid: authUser.uid,
+            emailVerified: authUser.emailVerified,
+            isAnonymous: authUser.isAnonymous,
           })
         );
+        sessionStorage.setItem("Auth token", authUser.accessToken);
+      } else {
+        dispatch(logout());
+      }
+    };
+    dispatchUser();
+  }, [authUser]);
 
-        sessionStorage.setItem("Auth token", userAuth.accessToken);
-
-        const userDoc = await getDoc(doc(db, "users", userAuth.uid));
+  useEffect(() => {
+    const recordNewUser = async () => {
+      if (user) {
+        const userDoc = await getDoc(doc(db, "users", user.uid));
         if (userDoc.data() == undefined) {
-          await registerUser(userAuth.uid, {
-            displayName: userAuth.displayName,
-            email: userAuth.email,
-            phoneNumber: userAuth.phoneNumber,
-            balanceID: userAuth.providerData[0].uid,
-            photoURL: userAuth.photoURL,
-            favourites: [],
-            uid: userAuth.uid,
+          await registerUser(auth.currentUser.uid, {
+            displayName: auth.currentUser.displayName,
+            email: auth.currentUser.email,
+            phoneNumber: auth.currentUser.phoneNumber,
+            balanceID: auth.currentUser.providerData[0].uid,
+            photoURL: auth.currentUser.photoURL,
+            uid: auth.currentUser.uid,
             balance: 0,
             rating: 0,
-            createdAt: userAuth.metadata.createdAt,
-            creationTime: userAuth.metadata.creationTime,
+            createdAt: auth.currentUser.metadata.createdAt,
+            creationTime: auth.currentUser.metadata.creationTime,
           });
         } else {
           console.log("User exists");
         }
-      } else {
-        dispatch(logout());
       }
-    });
-
-    return unsubscribe;
-  }, [dispatch]);
+    };
+    recordNewUser();
+  }, [user]);
 
   return (
     <div className="app flex flex-col items-center min-h-full">

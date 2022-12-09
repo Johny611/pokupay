@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/static/css/main.d22910c7.css",
+    "main.js": "/static/js/main.0779518d.js",
+    "static/media/apple1.jpeg": "/static/media/apple1.27214f8bed619f4a5737.jpeg",
+    "static/media/apple2.jpeg": "/static/media/apple2.5c9d5b48210883a8cde5.jpeg",
+    "static/media/user.png": "/static/media/user.724b79cd582c0a0944ee.png",
+    "static/media/location-black.png": "/static/media/location-black.7548d2e3343abd347cfe.png",
+    "static/media/location.png": "/static/media/location.7a2c57d808244d027384.png",
+    "static/media/services-active.png": "/static/media/services-active.f790bcba698d37deff0c.png",
+    "static/media/services.png": "/static/media/services.351c9b0e2579d24ed865.png",
+    "static/media/logo.png": "/static/media/logo.b56c8228019eac0780dd.png",
+    "static/media/google.png": "/static/media/google.f46272b643c93173f37b.png",
+    "static/media/slick.svg": "/static/media/slick.2630a3e3eab21c607e21.svg",
+    "static/media/slick.eot": "/static/media/slick.a4e97f5a2a64f0ab1323.eot",
+    "static/media/slick.ttf": "/static/media/slick.c94f7671dcc99dce43e2.ttf",
+    "static/media/slick.woff": "/static/media/slick.295183786cd8a1389865.woff",
+    "index.html": "/index.html",
+    "main.d22910c7.css.map": "/static/css/main.d22910c7.css.map",
+    "main.0779518d.js.map": "/static/js/main.0779518d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d22910c7.css",
+    "static/js/main.0779518d.js"
+  ]
+}

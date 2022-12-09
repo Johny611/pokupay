@@ -1,99 +1,222 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { IoPersonOutline } from "react-icons/io5";
 import search from "../assets/search.png";
 import { IoBagHandleOutline } from "react-icons/io5";
 import { IoSendOutline } from "react-icons/io5";
-import { IoAttachOutline } from "react-icons/io5";
-import { Navigate } from "react-router-dom";
+import { IoImage } from "react-icons/io5";
+import { Link, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { Typography } from "@material-tailwind/react";
+import { collection, getDocs } from "firebase/firestore";
+import { database, db, auth } from "../firebase";
+import {
+  ref,
+  get,
+  set,
+  remove,
+  onValue,
+  child,
+  push,
+  update,
+  query,
+  orderByKey,
+} from "firebase/database";
 
 const Chat = () => {
   const user = useSelector((state) => state.user.user);
   let token = sessionStorage.getItem("Auth token");
+  const [sellBuy, setSellBuy] = useState("buy");
+  const [sellingChats, setSellingChats] = useState([]);
+  const [buyingsChats, setBuyingsChats] = useState([]);
+  const [sellingID, setSellingID] = useState([]);
+  const [buyingID, setBuyingID] = useState([]);
 
-  if (!token) {
+  useEffect(() => {
+    const getLists = async () => {
+      const chatsSnapshot = await getDocs(
+        collection(db, "users", user.uid, "chats") //  buying chat list
+      );
+      chatsSnapshot.forEach((doc) => {
+        setBuyingID((prev) => [...prev, doc.id]);
+      });
+
+      const adsSnapshot = await getDocs(
+        collection(db, "users", user.uid, "ads") //  selling chat list
+      );
+      adsSnapshot.forEach((doc) => {
+        setSellingID((prev) => [...prev, doc.id]);
+      });
+    };
+    getLists();
+  }, []);
+
+  useEffect(() => {
+    // chat id is user.uid here
+    const getbuyingList = async () => {
+      buyingID.map((item) => {
+        onValue(
+          ref(database, `chats/${item}/${user.uid}`),
+          (snapshot) => {
+            if (snapshot.exists()) {
+              snapshot.forEach((childSnapshot) => {
+                setBuyingsChats(childSnapshot.val());
+                console.log(childSnapshot.val());
+              });
+            }
+          },
+          {
+            onlyOnce: false,
+          }
+        );
+      });
+    };
+
+    return () => getbuyingList();
+  }, []);
+
+  useEffect(() => {
+    const getSellingList = async () => {
+      sellingID.map((item) => {
+        onValue(
+          ref(database, `chats/${item}`),
+          (snapshot) => {
+            snapshot.forEach((childSnapshot) => {
+              // console.log(childSnapshot.key);
+              setSellingChats(childSnapshot.val());
+              console.log(childSnapshot.val());
+            });
+          },
+          {
+            onlyOnce: false,
+          }
+        );
+      });
+    };
+
+    return () => getSellingList();
+  }, []);
+
+  console.log(sellingID);
+  console.log(buyingID);
+
+  console.log("sellingChats", sellingChats);
+  console.log("buyingChats", buyingsChats);
+
+  if (!auth.currentUser) {
     return <Navigate to="/auth" />;
   } else {
     return (
-      <div className="xs:pb-12 flex flex-1 items-start w-full h-full">
-        <div className="chat_container flex flex-row justify-between m-3 rounded-xl overflow-hidden w-full min-h-[600px] bg-white">
-          <div className="flex-[0.4] bg-[#2f364a]">
+      <div className="xs:pb-12 flex items-stretch flex-1 w-full h-full bg-[#212633]">
+        <div className="chat_container flex flex-row justify-between overflow-hidden w-full min-h-[600px] pr-4">
+          <div className="flex-[0.4] bg-[#212633] my-4">
             <div className="flex justify-evenly mb-3 pt-3 text-white">
-              <p>Покупаю</p>
-              <p>Продаю</p>
+              <p
+                onClick={() => setSellBuy("buy")}
+                className="flex-1 cursor-pointer font-medium bg-[#febe32] hover:bg-[#2b3145] py-1 px-3 rounded-xl text-center text-black mx-[5px]"
+              >
+                Покупаю
+              </p>
+              <p
+                onClick={() => setSellBuy("sell")}
+                className="flex-1 cursor-pointer font-medium bg-[#161a25] hover:bg-[#2b3145] py-1 px-3 rounded-xl text-center text-white mx-[5px]"
+              >
+                Продаю
+              </p>
             </div>
-            <div className="flex bg-white p-3 w-11/12 my-0 mx-auto rounded-xl">
+            <div className="flex bg-[#161a25] py-1 px-4 w-11/12 my-0 mx-auto rounded-full">
               <img src={search} alt="" className="w-5 object-contain" />
               <input
-                className="w-full pl-3 outline-none"
+                className="w-full pl-3 text-[#b1b2b5] outline-none bg-transparent"
                 type="search"
                 name=""
                 id=""
-                placeholder="Search product..."
+                placeholder="Search..."
               />
             </div>
             <div className="py-3">
-              <div className="flex items-center p-[10px] bg-[#5a698f] hover:bg-[#8091ffb3]">
-                <IoBagHandleOutline
-                  style={{ fontSize: "30px", marginRight: "10px" }}
-                />
-                <div>
-                  <p className="text-sm font-medium">Product name</p>
-                  <p className="text-xs">Product detail</p>
-                </div>
-              </div>
+              {sellBuy === "sell" &&
+                Object.values(sellingChats).map((item) => (
+                  <div className="flex items-center gap-2 p-[10px] bg-[#161a25] hover:bg-[#8091ffb3]">
+                    <img
+                      className="w-[30px] object-contain"
+                      src={item.photoURL || require("../assets/icons/user.png")}
+                    />
+                    <div className="text-[#b1b2b5]">
+                      <p className="text-sm font-medium">{item.displayName}</p>
+                      <p className="text-sm font-medium">{item.productName}</p>
+                      <p className="text-xs">{item.content}</p>
+                    </div>
+                  </div>
+                ))}
+              {sellBuy === "buy" &&
+                Object.values(buyingsChats).map((item) => (
+                  <div className="flex items-center gap-2 p-[10px] bg-[#161a25] hover:bg-[#8091ffb3]">
+                    <img
+                      className="w-[30px] object-contain"
+                      src={item.photoURL || require("../assets/icons/user.png")}
+                    />
+                    <div className="text-[#b1b2b5]">
+                      <p className="text-sm font-medium">{item.displayName}</p>
+                      <p className="text-sm font-medium">{item.productName}</p>
+                      <p className="text-xs">{item.content}</p>
+                    </div>
+                  </div>
+                ))}
             </div>
           </div>
-          <div className="flex-[0.6] relative">
-            <div className="flex p-3 bg-[#2f374b38] border-b border-[#2f374b3b]">
-              <IoPersonOutline
-                style={{ fontSize: "24px", marginRight: "10px" }}
+          <div className="flex-1 relative bg-[#161a25] my-4 rounded-2xl overflow-hidden">
+            <div className="flex items-center gap-2 p-3 border-b border-[#ffffff3b]">
+              <img
+                className="w-[30px] object-contain"
+                src={require("../assets/icons/user.png")}
               />
-              <p>John Smith</p>
+              <Link to="/user-profile" className="text-[#b1b2b5]">
+                John Smith
+              </Link>
             </div>
-            <div></div>
-            <div className="flex items-center absolute w-full bottom-0 bg-[#ebebeb] h-14">
-              <div className="flex-1">
+            <div className="border-b border-[#ffffff38]">
+              <Link
+                to={"/product-link"}
+                className="flex items-center gap-2 text-white"
+              >
+                <img
+                  className="w-[100px] object-contain"
+                  src="https://photos5.appleinsider.com/gallery/45240-88149-The-new-MacBook-Pro-16-inch-xl.jpg"
+                />
+                <div>
+                  <Typography
+                    className="text-[13px] text-[#c0bfbf]"
+                    variant="small"
+                  >
+                    Macbook Pro M2
+                  </Typography>
+                  <Typography
+                    className="text-xs text-[#c0bfbf]"
+                    variant="small"
+                  >
+                    1000 u.e
+                  </Typography>
+                </div>
+              </Link>
+            </div>
+            <div className="flex-1"></div>
+            <div className="flex items-center absolute w-full bottom-0 h-14 border-t border-[#ffffff3b]">
+              <div className="flex items-center mx-4">
+                <IoImage className="text-2xl text-white my-3 cursor-pointer" />
+              </div>
+              <div className="flex-1 bg-[#212633] rounded-full">
                 <input
-                  className="w-full bg-transparent p-3 outline-none"
+                  className="w-full bg-transparent py-[7px] px-3 text-white outline-none"
                   type="text"
                   name=""
                   id=""
                   placeholder="Type your message here..."
                 />
               </div>
-              <div className="flex items-center pr-3">
-                <IoAttachOutline
-                  style={{ fontSize: "30px", marginRight: "10px" }}
-                />
-                <IoSendOutline style={{ fontSize: "30px" }} />
+              <div className="flex items-center mx-4">
+                <IoSendOutline className="text-[20px] text-white my-3 cursor-pointer" />
               </div>
             </div>
-          </div>
-        </div>
-
-        <div className="product_details_container md:hidden m-3 max-w-[30%] max-h-[95%] rounded-xl overflow-hidden p-4 bg-white">
-          <div className="product_pics max-w-[200px] my-0 mx-auto">
-            <img className="" src={require("../assets/apple1.jpeg")} alt="" />
-          </div>
-          <div className="product_titles text-center text-sm font-semibold">
-            <h3>MacBook Pro 13-inch - Apple</h3>
-          </div>
-          <div className="product_details text-xs font-medium">
-            <p>
-              Apple in October 2021 overhauled the high-end MacBook Pro,
-              introducing an entirely new design, new chips, new capabilities,
-              and more. As Apple says, the revamped MacBook Pro models offer up
-              extraordinary performance and the world's best notebook display.
-            </p>
-            <p>
-              {" "}
-              The 2021 MacBook Pro models come in 14.2-inch and 16.2-inch size
-              options and they're equipped with mini-LED displays, more ports,
-              up to 64GB memory, and more powerful Apple silicon chips, the M1
-              Pro and M1 Max. In short, they are the best MacBook Pro models to
-              date.
-            </p>
           </div>
         </div>
       </div>
