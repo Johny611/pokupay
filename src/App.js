@@ -6,7 +6,7 @@ import NotFound from "./components/NotFound";
 import Auth from "./pages/Auth";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Main from "./pages/Main";
-import Chat from "./pages/Chat";
+import Chat from "./pages/Messaging/Chat";
 import Favourite from "./pages/Favourite";
 import Profile from "./pages/Profile";
 import Publish from "./pages/Publish";
