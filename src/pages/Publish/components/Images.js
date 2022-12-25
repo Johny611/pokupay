@@ -116,7 +116,8 @@ const Images = () => {
           />
           <button
             onClick={(e) => deletePhoto(e, props.value[0])}
-            className="absolute text-[20px] top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 text-[#febe32] bg-[#212633] pt-0 pb-[3px] px-[8px] rounded-[20%]">
+            className="absolute text-[20px] top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 text-[#febe32] bg-[#212633] pt-0 pb-[3px] px-[8px] rounded-[20%]"
+          >
             x
           </button>
         </div>
@@ -162,7 +163,8 @@ const Images = () => {
           <div className="bg-[#2126331c] w-24 h-24 rounded-md cursor-pointer">
             <label
               className="w-full h-full flex items-center justify-center"
-              htmlFor="adPhoto">
+              htmlFor="adPhoto"
+            >
               <IoCameraOutline className="text-2xl" />
             </label>
             <input

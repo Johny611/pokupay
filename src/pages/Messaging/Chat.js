@@ -1,38 +1,84 @@
 import React, { useEffect, useState } from "react";
-import { IoPersonOutline } from "react-icons/io5";
+import "./Chat.css";
+import {
+  IoPersonOutline,
+  IoSendOutline,
+  IoBagHandleOutline,
+  IoCheckmarkDoneOutline,
+  IoImage,
+  IoTrashOutline,
+  IoFlagOutline,
+  IoRemoveCircleOutline,
+  IoBookmarkOutline,
+} from "react-icons/io5";
 import search from "../../assets/search.png";
-import { IoBagHandleOutline } from "react-icons/io5";
-import { IoSendOutline } from "react-icons/io5";
-import { IoImage } from "react-icons/io5";
 import { Link, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Typography } from "@material-tailwind/react";
-import { collection, getDocs } from "firebase/firestore";
-import { database, db, auth } from "../../firebase";
-import {
-  ref,
-  get,
-  set,
-  remove,
-  onValue,
-  child,
-  push,
-  update,
-  query,
-  orderByKey,
-} from "firebase/database";
+import { Typography, Tooltip, Textarea } from "@material-tailwind/react";
+import { collection, getDocs, doc, getDoc } from "firebase/firestore";
+import { db, auth, database } from "../../firebase";
+import SellList from "./SellList";
+import BuyList from "./BuyList";
 import useMessages from "../../hooks/useMessages";
-import ChatList from "./ChatList";
+import timestampToDate from "timestamp-to-date";
+import TextareaAutosize from "react-textarea-autosize";
+import { serverTimestamp, ref, push } from "firebase/database";
 
 const Chat = () => {
-  const user = useSelector((state) => state.user.user);
-  const [, , loadBuyList, loadSellList, buyingsChats, sellingChats] =
-    useMessages();
   let token = sessionStorage.getItem("Auth token");
+  const user = useSelector((state) => state.user.user);
+  const activeChat = useSelector((state) => state.activeChat.data);
+  const [chatMessage, setChatMessage] = useState("");
   const [sellBuy, setSellBuy] = useState("buy");
-
   const [sellingID, setSellingID] = useState([]);
   const [buyingID, setBuyingID] = useState([]);
+  const [currenChatID, setCurrentChatID] = useState("");
+  const [sendingInfo, setSendingInfo] = useState({});
+  const [chatInfo, setChatInfo] = useState({});
+  const [product, setProduct] = useState({ photos: [] });
+
+  useEffect(() => {
+    const setChat = () => {
+      activeChat &&
+        activeChat.items.map((item) => {
+          if (user?.uid !== item.sentBy) {
+            setChatInfo({
+              senderName: item.displayName,
+              productName: item.productName,
+            });
+          }
+        });
+    };
+    setChat();
+  }, [activeChat]);
+
+  useEffect(() => {
+    const getPtoduct = async () => {
+      if (activeChat) {
+        const docRef = doc(
+          db,
+          activeChat.items[0].forBuy || activeChat.items[0].forSell
+        );
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          setProduct(docSnap.data());
+        } else {
+          // doc.data() will be undefined in this case
+          console.log("No such document!");
+        }
+      }
+    };
+    getPtoduct();
+  }, [activeChat]);
+
+  const handleInput = (e) => {
+    console.log(e);
+    if (e.code === "Enter" || e.code === "NumpadEnter") {
+      setChatMessage((prev) => (prev += "\n"));
+      e.preventDefault();
+    }
+  };
 
   useEffect(() => {
     const getLists = async () => {
@@ -54,30 +100,55 @@ const Chat = () => {
   }, []);
 
   useEffect(() => {
-    // chat id is user.uid here
-    const loader = () => {
-      loadBuyList(buyingID, user?.uid);
+    const setSendingMessage = () => {
+      if (activeChat && user) {
+        if (activeChat.id === user.uid) {
+          setSendingInfo({
+            content: chatMessage,
+            createdAt: serverTimestamp(),
+            displayName: user.displayName,
+            sentBy: user.uid,
+            productName: activeChat.items[0].productName,
+            forBuy: activeChat.items[0].forBuy,
+            photoURL: activeChat.items[0].photoURL,
+            read: false,
+            type: "text",
+          });
+        } else {
+          setSendingInfo({
+            content: chatMessage,
+            createdAt: serverTimestamp(),
+            displayName: user.displayName,
+            sentBy: user.uid,
+            productName: activeChat.items[0].productName,
+            forSell: activeChat.items[0].forBuy,
+            photoURL: activeChat.items[0].photoURL,
+            read: false,
+            type: "text",
+          });
+        }
+      }
+      console.log("sendingInfo", sendingInfo);
     };
-    return () => {
-      loader();
-    };
-  }, []);
+    setSendingMessage();
+  }, [chatMessage]);
 
-  useEffect(() => {
-    const loader = () => {
-      loadSellList(sellingID);
-    };
-    return () => {
-      loader();
-    };
-  }, []);
+  const sendMessage = async () => {
+    await push(
+      ref(database, `chats/${currenChatID}/${activeChat.id}`),
+      sendingInfo
+    )
+      .then(() => setChatMessage(""))
+      .catch((err) => console.log(err));
+  };
 
-  console.log(sellingID);
-  console.log(buyingID);
+  // console.log("sellingID", sellingID);
 
-  console.log("sellingChats", sellingChats);
-  console.log("buyingChats", buyingsChats);
-  // console.log(chatLists);
+  // console.log("chat message", chatMessage);
+
+  // console.log("current chat", currenChatID);
+  // console.log("activeChat", activeChat);
+  // console.log("sendingInfo", sendingInfo);
 
   if (!auth.currentUser) {
     return <Navigate to="/auth" />;
@@ -86,15 +157,25 @@ const Chat = () => {
       <div className="xs:pb-12 flex items-stretch flex-1 w-full h-full bg-[#212633]">
         <div className="chat_container flex flex-row justify-between overflow-hidden w-full min-h-[600px] pr-4">
           <div className="flex-[0.4] bg-[#212633] my-4">
-            <div className="flex justify-evenly mb-3 pt-3 text-white">
+            <div className="flex justify-evenly mb-3 text-white">
               <p
                 onClick={() => setSellBuy("buy")}
-                className="flex-1 cursor-pointer font-medium bg-[#febe32] hover:bg-[#2b3145] py-1 px-3 rounded-xl text-center text-black mx-[5px]">
+                className={`flex-1 cursor-pointer font-medium ${
+                  sellBuy === "buy"
+                    ? "bg-[#febe32] text-black hover:bg-[#87620b]"
+                    : "bg-[#161a25] hover:bg-[#2b3145]"
+                } py-1 px-3 rounded-lg text-center mx-[5px]`}
+              >
                 Покупаю
               </p>
               <p
                 onClick={() => setSellBuy("sell")}
-                className="flex-1 cursor-pointer font-medium bg-[#161a25] hover:bg-[#2b3145] py-1 px-3 rounded-xl text-center text-white mx-[5px]">
+                className={`flex-1 cursor-pointer font-medium ${
+                  sellBuy === "sell"
+                    ? "bg-[#febe32] text-black hover:bg-[#87620b]"
+                    : "bg-[#161a25] hover:bg-[#2b3145]"
+                } py-1 px-3 rounded-lg text-center text-white mx-[5px]`}
+              >
                 Продаю
               </p>
             </div>
@@ -108,61 +189,141 @@ const Chat = () => {
                 placeholder="Search..."
               />
             </div>
-            <div className="py-3">
+            <div className="mt-3 max-h-[480px] overflow-y-auto overflow-x-hidden">
               {sellBuy === "sell" &&
-                sellingID.map((item) => <ChatList listID={item} />)}
+                sellingID.map((item) => (
+                  <div onClick={() => setCurrentChatID(item)} key={item}>
+                    <SellList listID={item} />
+                  </div>
+                ))}
               {sellBuy === "buy" &&
-                buyingID.map((item) => <ChatList listID={item} />)}
+                buyingID.map((item) => (
+                  <div onClick={() => setCurrentChatID(item)} key={item}>
+                    <BuyList
+                      listID={item}
+                      directory={user.uid}
+                      activeChat={currenChatID}
+                    />
+                  </div>
+                ))}
             </div>
           </div>
-          <div className="flex-1 relative bg-[#161a25] my-4 rounded-2xl overflow-hidden">
-            <div className="flex items-center gap-2 p-3 border-b border-[#ffffff3b]">
-              <img
-                className="w-[30px] object-contain"
-                src={require("../../assets/icons/user.png")}
-              />
-              <Link to="/user-profile" className="text-[#b1b2b5]">
-                John Smith
-              </Link>
+
+          <div className="flex flex-col flex-1 relative bg-[#161a25] my-4 rounded-lg overflow-hidden">
+            <div className="flex items-center justify-between gap-2 p-3 border-b border-[#ffffff3b]">
+              <div className="flex items-center gap-2">
+                <img
+                  className="w-[30px] object-contain"
+                  src={require("../../assets/icons/user.png")}
+                />
+                <Link to="/user-profile" className="text-[#b1b2b5]">
+                  {chatInfo.senderName}
+                </Link>
+              </div>
+              <div className="flex gap-3 text-white text-xl">
+                <IoBookmarkOutline />
+                <IoFlagOutline />
+                <IoRemoveCircleOutline />
+                <IoTrashOutline />
+              </div>
             </div>
             <div className="border-b border-[#ffffff38]">
               <Link
                 to={"/product-link"}
-                className="flex items-center gap-2 text-white">
+                className="flex items-center gap-2 text-white"
+              >
                 <img
                   className="w-[100px] object-contain"
-                  src="https://photos5.appleinsider.com/gallery/45240-88149-The-new-MacBook-Pro-16-inch-xl.jpg"
+                  src={product && product?.photos[0]?.url}
                 />
                 <div>
                   <Typography
                     className="text-[13px] text-[#c0bfbf]"
-                    variant="small">
-                    Macbook Pro M2
+                    variant="small"
+                  >
+                    {chatInfo.productName}
                   </Typography>
                   <Typography
                     className="text-xs text-[#c0bfbf]"
-                    variant="small">
-                    1000 u.e
+                    variant="small"
+                  >
+                    {product.price && product.price}
+                    {!product.price &&
+                      `${product.fromPrice} - ${product.priceTo}`}{" "}
+                    {product.currency}
                   </Typography>
                 </div>
               </Link>
             </div>
-            <div className="flex-1"></div>
-            <div className="flex items-center absolute w-full bottom-0 h-14 border-t border-[#ffffff3b]">
+            <div className="flex-1 flex flex-col overflow-y-auto overflow-x-hidden h-full max-h-[450px]">
+              {activeChat &&
+                activeChat.items.map((item) => (
+                  <div
+                    className={`flex flex-col w-fit mx-[10px] my-2 transition-all ${
+                      item.sentBy === user.uid
+                        ? "self-end items-end"
+                        : "flex-row-reverse items-baseline"
+                    }`}
+                    key={item.createdAt}
+                  >
+                    <div
+                      className={`flex gap-4 relative py-1 rounded-t-xl ${
+                        item.sentBy === user.uid
+                          ? "self-end rounded-bl-xl pl-4 pr-1 bg-[#febe3221]"
+                          : "rounded-br-xl flex-row-reverse px-3 bg-[#292f40]"
+                      }`}
+                    >
+                      <Typography
+                        // key={i}
+                        className="text-white whitespace-pre-line"
+                        variant="small"
+                      >
+                        {item.content.split("\n").join("\n")}
+                      </Typography>
+
+                      <IoCheckmarkDoneOutline
+                        className={`text-lg self-end ${
+                          item.sentBy !== user.uid && "hidden"
+                        } ${
+                          item.read === false
+                            ? "text-[#c3c3c3]"
+                            : "text-[#febe32]"
+                        }`}
+                      />
+                    </div>
+                    <Typography
+                      variant="small"
+                      className={`text-gray-500 text-[10px] m-[3px] ${
+                        item.sentBy === user.uid ? "self-end" : "self-start"
+                      }`}
+                    >
+                      {timestampToDate(item.createdAt, "yyyy-MM-dd  HH-mm")}
+                    </Typography>
+                    {/* // need to update with moment time format library */}
+                  </div>
+                ))}
+            </div>
+            <div className="flex items-center w-full min-h-14 border-t border-[#ffffff3b]">
               <div className="flex items-center mx-4">
                 <IoImage className="text-2xl text-white my-3 cursor-pointer" />
               </div>
-              <div className="flex-1 bg-[#212633] rounded-full">
-                <input
-                  className="w-full bg-transparent py-[7px] px-3 text-white outline-none"
-                  type="text"
-                  name=""
-                  id=""
+              <div className="flex-1 mt-2 relative">
+                <TextareaAutosize
+                  onKeyDown={(e) => handleInput(e)}
+                  value={chatMessage}
+                  onChange={(e) => setChatMessage(e.target.value)}
+                  name="chatMessage"
+                  id="chatMessage"
                   placeholder="Type your message here..."
+                  maxRows={6}
+                  className="w-full h-10 bg-[#212633] overflow-hidden resize-none rounded-xl py-[7px] px-3 text-white outline-none"
                 />
               </div>
               <div className="flex items-center mx-4">
-                <IoSendOutline className="text-[20px] text-white my-3 cursor-pointer" />
+                <IoSendOutline
+                  onClick={() => sendMessage()}
+                  className="text-[20px] text-white my-3 cursor-pointer"
+                />
               </div>
             </div>
           </div>

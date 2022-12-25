@@ -22,7 +22,7 @@ import MobileChat from "./pages/MobileChat";
 import ChatRoom from "./pages/ChatRoom";
 import { registerUser } from "./app/functions";
 import { doc, getDoc } from "firebase/firestore";
-import { signOut } from "firebase/auth";
+import { signOut, onAuthStateChanged } from "firebase/auth";
 import { ref, deleteObject } from "firebase/storage";
 import Product from "./pages/Product";
 
@@ -86,25 +86,14 @@ function App() {
     };
   }, [windowSize, location]);
 
-  // useEffect(() => {
-  //   const unsubscribe = () => {
-  //     auth.onAuthStateChanged(async (userAuth) => {
-  //       setAuthUser(userAuth);
-  //     });
-  //   };
-  //   unsubscribe();
-  // }, []);
-
   useEffect(() => {
-    if (auth) {
-      auth.onAuthStateChanged(async (userAuth) => {
-        if (userAuth) {
-          setAuthUser(userAuth);
-        } else {
-          setAuthUser(null);
-        }
-      });
-    }
+    const unsub = onAuthStateChanged(auth, (userAuth) => {
+      setAuthUser(userAuth);
+    });
+
+    return () => {
+      unsub();
+    };
   }, []);
 
   useEffect(() => {

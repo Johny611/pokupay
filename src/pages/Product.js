@@ -28,7 +28,7 @@ const Product = () => {
   const params = useParams();
   let user = useSelector((state) => state.user.user);
   const [message, setMessage] = useState("");
-  const [sendMessageFromProduct] = useMessages();
+  const { sendMessageFromProduct } = useMessages();
 
   useEffect(() => {
     const getProduct = async () => {
@@ -62,7 +62,7 @@ const Product = () => {
       type: "text",
       forBuy: `ads/${params.category}/${params.categoryType}/${params.productID}`,
       productName: product.title,
-      photoURL: user.photoURL,
+      photoURL: product.photos[0].url,
       read: false,
     };
     sendMessageFromProduct(data, user.uid, params.productID);
@@ -106,7 +106,8 @@ const Product = () => {
             <div className="flex">
               <Typography
                 className="border-b-[3px] border-[#febe32] px-8 py-[8px] text-[#febe32] text-base"
-                variant="lead">
+                variant="lead"
+              >
                 Описание
               </Typography>
               <Typography className="px-8 py-[8px] text-base" variant="lead">
@@ -122,12 +123,14 @@ const Product = () => {
             <div className="product_details p-4 flex gap-3">
               <Typography
                 variant="small"
-                className="p-[8px] rounded-[5px] bg-[#21263321]">
+                className="p-[8px] rounded-[5px] bg-[#21263321]"
+              >
                 {params.category}
               </Typography>
               <Typography
                 variant="small"
-                className="p-[8px] rounded-[5px] bg-[#21263321]">
+                className="p-[8px] rounded-[5px] bg-[#21263321]"
+              >
                 {params.categoryType}
               </Typography>
             </div>
@@ -161,12 +164,14 @@ const Product = () => {
                 </Typography>
                 <Typography
                   variant="small"
-                  className="text-[11px] text-gray-700 ">
+                  className="text-[11px] text-gray-700 "
+                >
                   На PokuPay с январь 2021
                 </Typography>
                 <Typography
                   variant="small"
-                  className="text-[10px] text-[#d89400]">
+                  className="text-[10px] text-[#d89400]"
+                >
                   Онлайн в 9:55
                 </Typography>
               </div>
@@ -175,7 +180,8 @@ const Product = () => {
               <IoCall className="text-[#febe32] text-2xl" />
               <Typography
                 className="font-semibold underline cursor-pointer"
-                variant="small">
+                variant="small"
+              >
                 +998XX XXX XXXX
               </Typography>
             </div>
@@ -237,7 +243,8 @@ const Product = () => {
             <div>
               <Typography
                 variant="small"
-                className="text-base font-semibold text-[#212633]">
+                className="text-base font-semibold text-[#212633]"
+              >
                 Имя пользователя
               </Typography>
               <Typography variant="small" className="text-xs text-gray-700">
@@ -245,7 +252,8 @@ const Product = () => {
               </Typography>
               <Typography
                 variant="small"
-                className="text-[13px] text-[#212633] font-semibold ">
+                className="text-[13px] text-[#212633] font-semibold "
+              >
                 Онлайн в 9:55
               </Typography>
             </div>
@@ -270,12 +278,14 @@ const Product = () => {
           <div className="mt-4 flex justify-center gap-4">
             <Link
               to={`/chat`}
-              className="bg-[#febe32] py-[10px] px-[20px] font-semibold rounded-md w-1/2 text-center">
+              className="bg-[#febe32] py-[10px] px-[20px] font-semibold rounded-md w-1/2 text-center"
+            >
               Написать
             </Link>
             <Link
               to={`/profile`}
-              className="bg-[#febe32] py-[10px] px-[20px] font-semibold rounded-md w-1/2 text-center">
+              className="bg-[#febe32] py-[10px] px-[20px] font-semibold rounded-md w-1/2 text-center"
+            >
               Профиль
             </Link>
           </div>
@@ -297,7 +307,8 @@ const Product = () => {
           </Typography>
           <Link
             className="bg-[#febe32] p-[10px] rounded-md font-semibold"
-            to={`/product/${params.category}/${params.categoryType}/${params.productID}`}>
+            to={`/product/${params.category}/${params.categoryType}/${params.productID}`}
+          >
             Купить с доставкой
           </Link>
         </div>
